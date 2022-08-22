@@ -1,16 +1,26 @@
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from '../Header';
+import Footer from '../Footer';
 
-const App = () => {
-  const tittle = React.useRef('MyProject');
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="border-red-600 border-solid border-2 rounded-xl p-2 m-3">
-          {tittle.current}
-        </h1>
+const App = () => (
+  <Router>
+    <div className="container mx-auto flex flex-col min-h-full">
+      {/* header */}
+      <header className="container">
+        <Routes>
+          <Route path="/" element={<Header />} />
+        </Routes>
       </header>
+      {/* body */}
+      <section className="container flex grow" />
+      {/* footer */}
+      <footer className="container">
+        <Routes>
+          <Route path="/" element={<Footer />} />
+        </Routes>
+      </footer>
     </div>
-  );
-};
+  </Router>
+);
 
 export default App;

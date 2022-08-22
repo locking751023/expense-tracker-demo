@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    @apply h-full
+  }
+  body {
+    @apply h-full bg-slate-100
+  }
+  h1 {
+    @apply text-4xl font-sans
+  }
+  #root {
+    @apply h-full
+  }
+}
+
+
+@layer utilities {
+  .outline-r {
+    @apply outline outline-2 outline-red-600
+  }
+  .outline-b {
+    @apply outline outline-2 outline-blue-600
+  }
+  .outline-g {
+    @apply outline outline-2 outline-green-600
+  }
+  .outline-y {
+    @apply outline outline-2 outline-yellow-600
+  }
+  .outline-bk {
+    @apply outline outline-2 outline-black
+  }
+}
