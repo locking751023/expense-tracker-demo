@@ -4,8 +4,8 @@ import NavItem from './NavItems.json';
 // import style from './Header.module.scss';
 
 const Header = () => (
-  <div className="h-18 mt-1 p-4 flex justify-between bg-gray-100 shadow-lg">
-    <h1 className="mt-auto">記帳簿</h1>
+  <div className="p-5 flex justify-between bg-sky-300 shadow-lg rounded-md">
+    <h1>記帳簿</h1>
     <nav className="mt-auto">
       {NavItem.map((item) => (
         <Link
@@ -20,4 +20,4 @@ const Header = () => (
   </div>
 );
 
-export default React.memo(Header, () => true);
+export default React.memo(Header);

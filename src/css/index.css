@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    @apply h-full
-  }
-  body {
+  html,body {
     @apply h-full bg-slate-100
   }
   h1 {
-    @apply text-4xl font-sans
+    @apply text-2xl font-sans
+  }
+  h2 {
+    @apply text-xl font-sans
   }
   #root {
     @apply h-full
@@ -18,7 +18,8 @@
 }
 
 
-@layer utilities {
+@layer components {
+  /* for dev */
   .outline-r {
     @apply outline outline-2 outline-red-600
   }

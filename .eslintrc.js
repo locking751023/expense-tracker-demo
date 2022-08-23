@@ -1,20 +1,18 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:prettier/recommended',
+    // prettier-ignore
+    'react-app',
+    'react-app/jest',
     'airbnb',
+    'plugin:prettier/recommended',
   ],
-  overrides: [],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['src'],
+      },
+    },
   },
-  plugins: ['react'],
   rules: {
     'global-require': 0,
     'import/no-extraneous-dependencies': 0,
@@ -28,7 +26,10 @@ module.exports = {
     'no-restricted-exports': 0,
     'react/button-has-type': 0,
     'react/destructuring-assignment': 0,
-    'react/function-component-definition': [2, { namedComponents: 'arrow-function' }],
+    'react/function-component-definition': [
+      2,
+      { namedComponents: 'arrow-function' },
+    ],
     'react/jsx-filename-extension': 0,
     'react/jsx-one-expression-per-line': 0,
     'react/jsx-uses-react': 'off',

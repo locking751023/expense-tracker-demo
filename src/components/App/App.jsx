@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from '../Header';
+import Home from '../Home';
 import Footer from '../Footer';
 
 const App = () => (
   <Router>
-    <div className="container mx-auto flex flex-col min-h-full">
+    <div className="container mx-auto flex flex-col h-full">
       {/* header */}
       <header className="container">
         <Routes>
@@ -12,7 +13,11 @@ const App = () => (
         </Routes>
       </header>
       {/* body */}
-      <section className="container flex grow" />
+      <section className="container mb-1 max-h-[83%] flex grow shadow-lg">
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </section>
       {/* footer */}
       <footer className="container">
         <Routes>

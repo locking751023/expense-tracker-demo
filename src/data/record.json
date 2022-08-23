@@ -1,0 +1,1007 @@
+[
+  {
+    "id":1,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 5
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 15
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 20
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 25
+      }
+    ],
+    "cost": 23280,
+    "revenue": 36000,
+    "date": "2022/08/20",
+    "local": "無興市場"
+  },
+  {
+    "id":2,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 6
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 11
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 16
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 21
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 26
+      }
+    ],
+    "cost": 2613,
+    "revenue": 3300,
+    "date": "2022/08/21",
+    "local": "林口市場"
+  },
+  {
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":4,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":5,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":6,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },{
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },{
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },{
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },{
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },{
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },{
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },{
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  },
+  {
+    "id":3,
+    "products": [
+      {
+        "id": "prod-1",
+        "name": "蹄膀",
+        "price": 220,
+        "unit": "piece",
+        "count": 10
+      },
+      {
+        "id": "prod-2",
+        "name": "豬腳",
+        "price": 12,
+        "unit": "perWeight",
+        "count": 14
+      },
+      {
+        "id": "prod-3",
+        "name": "五花肉",
+        "price": 22,
+        "unit": "perWeight",
+        "count": 10
+      },
+      {
+        "id": "prod-4",
+        "name": "嘴邊肉",
+        "price": 1.375,
+        "unit": "perWeight",
+        "count": 3
+      },
+      {
+        "id": "prod-5",
+        "name": "大腸",
+        "price": 30,
+        "unit": "perWeight",
+        "count": 21
+      }
+    ],
+    "cost": 3223,
+    "revenue": 4000,
+    "date": "2022/08/22",
+    "local": "無興市場"
+  }
+]
