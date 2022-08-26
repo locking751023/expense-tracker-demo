@@ -1,3 +1,7 @@
 .root {
-
+  :global(.active) {
+    background-color: white;
+    border: 1px solid rgb(14 165 233);
+    border-bottom: none
+  }
 };

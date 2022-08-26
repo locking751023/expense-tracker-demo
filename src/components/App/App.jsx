@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from '../Header';
 import Home from '../Home';
+import Record from '../Record';
 import Footer from '../Footer';
 
 const App = () => (
@@ -9,19 +10,20 @@ const App = () => (
       {/* header */}
       <header className="container">
         <Routes>
-          <Route path="/" element={<Header />} />
+          <Route path="/*" element={<Header />} />
         </Routes>
       </header>
       {/* body */}
       <section className="container mb-1 max-h-[83%] flex grow shadow-lg">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="record" element={<Record />} />
         </Routes>
       </section>
       {/* footer */}
       <footer className="container">
         <Routes>
-          <Route path="/" element={<Footer />} />
+          <Route path="/*" element={<Footer />} />
         </Routes>
       </footer>
     </div>

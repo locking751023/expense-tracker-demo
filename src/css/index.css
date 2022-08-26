@@ -19,6 +19,9 @@
 
 
 @layer components {
+  .btn {
+    @apply px-3 py-2 rounded-md
+  }
   /* for dev */
   .outline-r {
     @apply outline outline-2 outline-red-600

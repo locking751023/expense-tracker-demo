@@ -1,8 +1,14 @@
 import React from 'react';
 import Item from '../Item';
-// import style from './Card.module.scss';
 
-const Card = (props) => {
+type RecordCardProps = {
+  cost: Number,
+  revenue: Number,
+  date: String,
+  local: String,
+};
+
+const RecordCard: React.FC<RecordCardProps> = (props) => {
   const { cost, revenue, date, local } = props.record;
   return (
     <div className="grid grid-cols-5 gap-1 border-b-2">
@@ -15,4 +21,4 @@ const Card = (props) => {
   );
 };
 
-export default React.memo(Card);
+export default React.memo(RecordCard);
