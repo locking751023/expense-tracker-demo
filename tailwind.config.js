@@ -4,6 +4,15 @@ module.exports = {
   presets: [],
   darkMode: 'media', // or 'class'
   theme: {
+    extend: {
+      colors: {
+        primary: '#0ea5e9',
+        danger: '#dc3545',
+        warning: '#e7b727',
+        success: '#408558',
+        info: '#0dcaf0',
+      },
+    },
     screens: {
       sm: '640px',
       md: '768px',

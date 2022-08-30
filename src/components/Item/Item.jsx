@@ -5,7 +5,7 @@ type ItemProps = {
 };
 
 const Item: React.FC<ItemProps> = ({ item }) => (
-  <div className="py-2 px-auto my-auto text-center break-words">{item}</div>
+  <div className="px-auto my-auto break-words py-2 text-center">{item}</div>
 );
 
 export default React.memo(Item, () => true);

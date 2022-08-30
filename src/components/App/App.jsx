@@ -6,7 +6,7 @@ import Footer from '../Footer';
 
 const App = () => (
   <Router>
-    <div className="container mx-auto flex flex-col h-full">
+    <div className="container mx-auto flex h-full flex-col">
       {/* header */}
       <header className="container">
         <Routes>
@@ -14,7 +14,7 @@ const App = () => (
         </Routes>
       </header>
       {/* body */}
-      <section className="container mb-1 max-h-[83%] flex grow shadow-lg">
+      <section className="container mb-1 flex max-h-[83%] grow shadow-lg">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="record" element={<Record />} />

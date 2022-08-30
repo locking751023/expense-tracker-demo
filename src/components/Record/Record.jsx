@@ -15,9 +15,9 @@ const Record: React.FC<RecordProps> = () => {
           <h2 className="my-2">日期：{date}</h2>
           <h2 className="my-2">地點：{local}</h2>
         </div>
-        <div className="flex my-auto ">
-          <button className="btn mx-2 bg-sky-500 text-white">編輯</button>
-          <button className="btn mx-2 bg-red-500 text-white">刪除</button>
+        <div className="my-auto flex ">
+          <button className="btn mx-2 bg-primary text-white">編輯</button>
+          <button className="btn mx-2 bg-danger text-white">刪除</button>
         </div>
       </header>
       <div className="grid grid-cols-6 gap-1 border-b-2 border-gray-500">
@@ -31,7 +31,7 @@ const Record: React.FC<RecordProps> = () => {
         ))}
       </div>
       <div>
-        <div className="flex flex-row-reverse px-2 mt-3">營業額：10000</div>
+        <div className="mt-3 flex flex-row-reverse px-2">營業額：10000</div>
       </div>
     </div>
   );
