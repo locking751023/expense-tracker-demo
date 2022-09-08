@@ -17,7 +17,7 @@ const Header = () => (
             {item.name}
           </NavLink>
         ))}
-        <button className="btn ml-3 bg-success text-white hover:shadow-md">
+        <button className="btn ml-3 bg-success text-white">
           <Link to="logout">登出</Link>
         </button>
       </nav>
@@ -25,4 +25,4 @@ const Header = () => (
   </div>
 );
 
-export default React.memo(Header);
+export default React.memo(Header, () => true);

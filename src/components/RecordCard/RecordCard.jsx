@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Item from '../Item';
 
 type RecordCardProps = {
@@ -9,15 +10,17 @@ type RecordCardProps = {
 };
 
 const RecordCard: React.FC<RecordCardProps> = (props) => {
-  const { cost, revenue, date, local } = props.record;
+  const { id, cost, revenue, date, local } = props.record;
   return (
-    <div className="grid grid-cols-5 gap-1 border-b-2">
-      <Item item={date} />
-      <Item item={local} />
-      <Item item={cost} />
-      <Item item={revenue} />
-      <Item item={revenue - cost} />
-    </div>
+    <Link to={`record/${id}`}>
+      <div className="grid grid-cols-5 gap-1 border-b-2">
+        <Item item={date} />
+        <Item item={local} />
+        <Item item={cost} />
+        <Item item={revenue} />
+        <Item item={revenue - cost} />
+      </div>
+    </Link>
   );
 };
 

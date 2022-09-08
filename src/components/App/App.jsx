@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from '../Header';
 import Home from '../Home';
 import Record from '../Record';
+import NewRecord from '../NewRecord';
 import Footer from '../Footer';
 
 const App = () => (
@@ -9,22 +10,19 @@ const App = () => (
     <div className="container mx-auto flex h-full flex-col">
       {/* header */}
       <header className="container">
-        <Routes>
-          <Route path="/*" element={<Header />} />
-        </Routes>
+        <Header />
       </header>
       {/* body */}
       <section className="container mb-1 flex max-h-[83%] grow shadow-lg">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="record" element={<Record />} />
+          <Route path="record/:id" element={<Record />} />
+          <Route path="record/new" element={<NewRecord />} />
         </Routes>
       </section>
       {/* footer */}
       <footer className="container">
-        <Routes>
-          <Route path="/*" element={<Footer />} />
-        </Routes>
+        <Footer />
       </footer>
     </div>
   </Router>

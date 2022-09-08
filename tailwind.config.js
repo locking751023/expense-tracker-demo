@@ -10,6 +10,7 @@ module.exports = {
         danger: '#dc3545',
         warning: '#e7b727',
         success: '#408558',
+        light: '#94a3b8',
         info: '#0dcaf0',
       },
     },

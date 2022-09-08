@@ -1,19 +1,21 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import Item from '../Item';
 import ProductCard from '../ProductCard';
 import NAVITEMS from './NavItems.json';
-import RECORD from '../../data/record.json';
+import recordSeeder from '../../data/recordSeeder';
 
-type RecordProps = {};
+const Record = () => {
+  const params = useParams();
+  const record = recordSeeder().find((item) => item.id === params.id / 1);
+  const { products, date, local, revenue } = record;
 
-const Record: React.FC<RecordProps> = () => {
-  const { products, date, local } = RECORD[0];
   return (
     <div className="h-full w-full p-3">
       <header className="flex justify-between">
-        <div className="flex flex-col justify-center">
-          <h2 className="my-2">日期：{date}</h2>
-          <h2 className="my-2">地點：{local}</h2>
+        <div className="flex flex-col sm:flex-row">
+          <h2 className="m-2 sm:my-2">日期：{date}</h2>
+          <h2 className="m-2 sm:my-2">地點：{local}</h2>
         </div>
         <div className="my-auto flex ">
           <button className="btn mx-2 bg-primary text-white">編輯</button>
@@ -25,14 +27,12 @@ const Record: React.FC<RecordProps> = () => {
           <Item item={item} key={item} />
         ))}
       </div>
-      <div className="max-h-[68%] overflow-y-scroll">
+      <div className="max-h-[78%] overflow-y-scroll shadow-md">
         {products.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}
       </div>
-      <div>
-        <div className="mt-3 flex flex-row-reverse px-2">營業額：10000</div>
-      </div>
+      <div className="mt-3 flex flex-row-reverse px-3">營業額：{revenue}</div>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import Item from '../Item';
 type ProductCardProps = {
   name: String,
   price: Number,
+  unit: String,
   count: Number,
   sendBack: Number,
 };

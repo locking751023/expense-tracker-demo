@@ -37,5 +37,6 @@ module.exports = {
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
     'react/state-in-constructor': 0,
+    'react/jsx-props-no-spreading': 0,
   },
 };
