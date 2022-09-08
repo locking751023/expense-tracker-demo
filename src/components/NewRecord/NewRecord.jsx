@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Item from '../Item';
@@ -11,12 +11,25 @@ const NewRecord = () => {
   const formMethod = useForm({ mode: 'onChange' });
   const {
     register,
+    control,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = formMethod;
 
+  const calRevenue = useCallback((data) => {
+    const revenue = Object.values(data.product).reduce((total, currentItem) => {
+      return total + currentItem.subTotalValue;
+    }, 0);
+    return revenue;
+  }, []);
+
   const atSubmit = (data) => {
-    console.log('form data:', data);
+    const newData = {
+      ...data,
+      revenue: calRevenue(data),
+    };
+    console.log('newData:', newData);
   };
 
   return (
@@ -74,8 +87,9 @@ const NewRecord = () => {
         {productSeeder.map((product) => (
           <InputForm
             product={product}
+            control={control}
+            setValue={setValue}
             key={product.id}
-            formMethod={formMethod}
           />
         ))}
       </div>

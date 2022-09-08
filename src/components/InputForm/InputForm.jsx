@@ -18,33 +18,40 @@ const unitSwitch = (count, unit) => {
 };
 
 const InputForm: React.FC<InputFormProps> = (props) => {
-  const { formMethod, product } = props;
+  const { control, setValue, product } = props;
   const { name, price, unit } = product;
-  const { watch } = formMethod;
   const [subTotal, setSubTotal] = React.useState();
-  // const formState = useFormState();
-  // console.log('formState:', formState);
-  const count =
-    watch(`product.${name}.amount`) - watch(`product.${name}.sendBack`);
 
   const { field: amount } = useController({
-    ...props.formMethod,
     name: `product.${name}.amount`,
+    control,
     rules: { required: true },
   });
   const { field: sendBack } = useController({
-    ...props.formMethod,
     name: `product.${name}.sendBack`,
+    control,
     rules: { required: true },
   });
+  const { field: subTotalValue } = useController({
+    name: `product.${name}.subTotalValue`,
+    control,
+    rules: { required: true },
+    defaultValue: 0,
+  });
 
-  const calSubTotal = React.useCallback((prodPrice, prodCount, prodUnit) => {
-    return Math.round(prodPrice * unitSwitch(prodCount, prodUnit)) || 0;
-  }, []);
+  const count = amount.value - sendBack.value;
+
+  const calSubTotal = React.useCallback(
+    (prodCount) => {
+      return Math.round(price * unitSwitch(prodCount, unit)) || 0;
+    },
+    [price, unit],
+  );
 
   React.useEffect(() => {
-    setSubTotal(calSubTotal(price, count, unit));
-  }, [calSubTotal, price, count, unit]);
+    setSubTotal(calSubTotal(count));
+    setValue(`product.${name}.subTotalValue`, subTotal);
+  }, [calSubTotal, count, setValue, name, subTotal]);
 
   return (
     <div className="grid grid-cols-6 gap-1 border-b-2 p-1">
@@ -67,7 +74,12 @@ const InputForm: React.FC<InputFormProps> = (props) => {
         className="rounded-md border-2 bg-slate-100"
         {...sendBack}
       />
-      <Item item={subTotal} />
+      <input
+        type="number"
+        className=" bg-slate-100 text-center"
+        disabled
+        {...subTotalValue}
+      />
     </div>
   );
 };
