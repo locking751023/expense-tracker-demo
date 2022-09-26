@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Item from '../Item';
 import ProductCard from '../ProductCard';
 import NAVITEMS from './NavItems.json';
@@ -18,7 +18,12 @@ const Record = () => {
           <h2 className="m-2 sm:my-2">地點：{local}</h2>
         </div>
         <div className="my-auto flex ">
-          <button className="btn mx-2 bg-primary text-white">編輯</button>
+          <Link
+            to={`/record/${params.id}/edit`}
+            className="btn mx-2 bg-primary text-white"
+          >
+            編輯
+          </Link>
           <button className="btn mx-2 bg-danger text-white">刪除</button>
         </div>
       </header>

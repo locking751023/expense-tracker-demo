@@ -3,6 +3,7 @@ import Header from '../Header';
 import Home from '../Home';
 import Record from '../Record';
 import NewRecord from '../NewRecord';
+import EditRecord from '../EditRecord';
 import Footer from '../Footer';
 
 const App = () => (
@@ -18,6 +19,7 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="record/:id" element={<Record />} />
           <Route path="record/new" element={<NewRecord />} />
+          <Route path="record/:id/edit" element={<EditRecord />} />
         </Routes>
       </section>
       {/* footer */}
