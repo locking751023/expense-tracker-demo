@@ -12,7 +12,7 @@ type RecordCardProps = {
 const RecordCard: React.FC<RecordCardProps> = (props) => {
   const { id, cost, revenue, date, local } = props.record;
   return (
-    <Link to={`record/${id}`}>
+    <Link to={`/record/${id}`}>
       <div className="grid grid-cols-5 gap-1 border-b-2">
         <Item item={date} />
         <Item item={local} />

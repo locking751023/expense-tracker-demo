@@ -5,7 +5,7 @@ import style from './Header.module.scss';
 
 const Header = () => (
   <div className={style.root}>
-    <div className="flex justify-between rounded-md bg-sky-300 p-5 shadow-lg">
+    <div className="flex h-full justify-between rounded-t-md bg-sky-300 p-5 shadow-lg">
       <h1>記帳簿</h1>
       <nav className="mt-auto">
         {NavItem.map((item) => (
