@@ -1,28 +1,36 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import NavItem from './NavItems.json';
 import style from './Header.module.scss';
+import useStore from '../../store';
 
-const Header = () => (
-  <div className={style.root}>
-    <div className="flex h-full justify-between rounded-t-md bg-sky-300 p-5 shadow-lg">
-      <h1>記帳簿</h1>
-      <nav className="mt-auto">
-        {NavItem.map((item) => (
-          <NavLink
-            key={item.name}
-            to={item.url}
-            className="rounded-t-lg border-b border-sky-500 px-4 py-2 text-blue-500 hover:border"
+const Header = () => {
+  const onLogout = useStore((state) => state.onLogout);
+
+  return (
+    <div className={style.root}>
+      <div className="flex h-full justify-between rounded-t-md bg-sky-300 p-5 shadow-lg">
+        <h1>記帳簿</h1>
+        <nav className="mt-auto">
+          {NavItem.map((item) => (
+            <NavLink
+              key={item.name}
+              to={item.url}
+              className="rounded-t-lg border-b border-sky-500 px-4 py-2 text-blue-500 hover:border"
+            >
+              {item.name}
+            </NavLink>
+          ))}
+          <button
+            className="btn ml-3 bg-success text-white"
+            onClick={() => onLogout()}
           >
-            {item.name}
-          </NavLink>
-        ))}
-        <button className="btn ml-3 bg-success text-white">
-          <Link to="logout">登出</Link>
-        </button>
-      </nav>
+            登出
+          </button>
+        </nav>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default React.memo(Header, () => true);

@@ -1,20 +1,51 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import shallow from 'zustand/shallow';
+import useStore from '../../store';
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const { user, onLogin } = useStore((state) => {
+    return {
+      user: state.user,
+      onLogin: state.onLogin,
+    };
+  }, shallow);
+
+  const atSubmit = (data) => {
+    onLogin(data.email, data.password);
+  };
+
+  if (user) {
+    const searchParams = new URLSearchParams(window.location.search);
+    const redirectUrl = decodeURIComponent(
+      searchParams.get('redirect_url') ?? '/records',
+    );
+    return <Navigate to={redirectUrl} />;
+  }
+
   return (
-    <div className="container m-auto flex h-2/3 max-w-lg flex-col rounded-xl border-8 shadow-xl backdrop-blur-lg md:h-[50%]">
+    <form
+      onSubmit={handleSubmit(atSubmit)}
+      className="container m-auto flex h-2/3 max-w-lg flex-col rounded-xl border-8 shadow-xl backdrop-blur-lg md:h-[50%]"
+    >
       <h2 className="w-full p-2 text-center">登入帳號</h2>
       <label className="flex h-[33%] flex-col justify-center px-2">
         帳號
         <input
           className="mt-2 rounded-sm p-2 leading-5"
-          type="text"
+          type="email"
           id="userId"
           placeholder="請輸入 email"
+          {...register('email', { required: true })}
         />
-        <small className="text-red-500">errorMessage</small>
       </label>
+      {errors.email && <small className="px-3 text-danger">此欄位為必填</small>}
       <label className="flex h-[28%] flex-col justify-center px-2">
         密碼
         <input
@@ -22,11 +53,23 @@ const Login = () => {
           type="text"
           id="userPassword"
           placeholder="請輸入密碼"
+          {...register('password', {
+            required: true,
+            maxLength: 12,
+          })}
         />
-        <small className="text-red-500">errorMessage</small>
       </label>
+      {errors.password?.type === 'required' && (
+        <small className="px-3 text-danger">此欄位為必填</small>
+      )}
+      {errors.password?.type === 'maxLength' && (
+        <small className="px-3 text-danger">長度超過15</small>
+      )}
       <div className="my-auto flex flex-col justify-evenly md:flex-row">
-        <button className="my-1 w-full rounded-md  bg-primary p-2  text-white md:w-[30%]">
+        <button
+          type="submit"
+          className="my-1 w-full rounded-md  bg-primary p-2  text-white md:w-[30%]"
+        >
           登入
         </button>
         <button className="my-1 w-full rounded-md  bg-[#4267B2] p-2 text-white md:w-[30%]">
@@ -42,7 +85,7 @@ const Login = () => {
       >
         註冊
       </Link>
-    </div>
+    </form>
   );
 };
 

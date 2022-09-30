@@ -1,11 +1,23 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Navigate } from 'react-router-dom';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
+import useStore from '../../../store';
 
 const Home = () => {
+  const user = useStore((state) => state.user);
+
+  if (!user) {
+    return (
+      <Navigate
+        to={`/user/login?redirect_url=${encodeURIComponent(
+          window.location.pathname,
+        )}`}
+        replace
+      />
+    );
+  }
   return (
-    // className="flex h-full flex-col items-center justify-center bg-opacity-50 bg-[url('/src/assets/images/login.jpg')] bg-cover bg-center bg-no-repeat"
     <div className="outline-r h-full bg-[url('/src/assets/images/home.jpg')] bg-cover bg-center bg-no-repeat">
       <div className="container mx-auto flex h-full flex-col p-2">
         <header className="container h-[11%]">
