@@ -44,8 +44,8 @@ const Login = () => {
           placeholder="請輸入 email"
           {...register('email', { required: true })}
         />
+        {errors.email && <small className="text-danger">此欄位為必填</small>}
       </label>
-      {errors.email && <small className="px-3 text-danger">此欄位為必填</small>}
       <label className="flex h-[28%] flex-col justify-center px-2">
         密碼
         <input
@@ -58,13 +58,13 @@ const Login = () => {
             maxLength: 12,
           })}
         />
+        {errors.password?.type === 'required' && (
+          <small className="text-danger">此欄位為必填</small>
+        )}
+        {errors.password?.type === 'maxLength' && (
+          <small className="text-danger">長度超過15</small>
+        )}
       </label>
-      {errors.password?.type === 'required' && (
-        <small className="px-3 text-danger">此欄位為必填</small>
-      )}
-      {errors.password?.type === 'maxLength' && (
-        <small className="px-3 text-danger">長度超過15</small>
-      )}
       <div className="my-auto flex flex-col justify-evenly md:flex-row">
         <button
           type="submit"

@@ -4,12 +4,14 @@ import {
   verifyToken,
   fetchLogin,
   cleanToken,
+  fetchRegister,
 } from '../services/api';
 
 const initialState = {
   isAppInitializedComplete: false,
   user: null,
   loading: false,
+  registerSuccess: false,
 };
 
 const useStore = create((set) => {
@@ -46,6 +48,20 @@ const useStore = create((set) => {
           set({ user: res.user });
         })
         .catch((err) => console.log('fetchLogin error:', err))
+        .finally(() => {
+          set({ loading: false });
+        });
+    },
+    onRegister(userData) {
+      set({ loading: true });
+      fetchRegister(userData)
+        .then((res) => {
+          console.log('register success:', res);
+          set({ registerSuccess: true });
+        })
+        .catch((err) => {
+          console.log('register error:', err);
+        })
         .finally(() => {
           set({ loading: false });
         });

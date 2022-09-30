@@ -56,6 +56,17 @@ export const fetchLogin = (email, password) => {
     .catch((err) => console.log('axios error:', err.response.data.message));
 };
 
+export const fetchRegister = (userData) => {
+  return axios
+    .post(`${baseURL}/register`, {
+      ...userData,
+    })
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => console.log('axios error:', err.response.data.message));
+};
+
 export const fetchRecord = () => {
   return apiHelper
     .get('/records')
