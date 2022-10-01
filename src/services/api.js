@@ -33,7 +33,7 @@ export const verifyToken = (token) => {
       },
     })
     .then(({ data }) => {
-      console.log('data:', data);
+      return data;
     })
     .catch((err) => {
       console.log('verifyToken error:', err);
@@ -47,7 +47,7 @@ export const fetchLogin = (email, password) => {
     .post(`${baseURL}/login`, {
       email,
       password,
-      expiresIn: '20',
+      expiresIn: '1d',
     })
     .then(({ data }) => {
       setToken(data.data.token);

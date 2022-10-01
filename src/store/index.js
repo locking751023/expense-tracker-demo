@@ -37,7 +37,7 @@ const useStore = create((set) => {
           });
       } else {
         set({
-          isAppInitializedComplete: false,
+          isAppInitializedComplete: true,
         });
       }
     },

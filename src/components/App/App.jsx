@@ -9,6 +9,7 @@ import Record from '../../pages/Record';
 import NewRecord from '../../pages/NewRecord';
 import EditRecord from '../../pages/EditRecord';
 import useStore from '../../store';
+import ProtectRoute from '../../containers/ProtectedRoute';
 
 const App = () => {
   const init = useStore((state) => state.init);
@@ -23,8 +24,15 @@ const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
-        <Route path="/" element={<Home />}>
-          <Route path="records" element={<Records />} />
+        <Route
+          path="/"
+          element={
+            <ProtectRoute>
+              <Home />
+            </ProtectRoute>
+          }
+        >
+          <Route path="/" element={<Records />} />
           <Route path="record/new" element={<NewRecord />} />
           <Route path="record/:rid" element={<Record />} />
           <Route path="record/:rid/edit" element={<EditRecord />} />

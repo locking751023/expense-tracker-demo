@@ -24,7 +24,7 @@ const Login = () => {
   if (user) {
     const searchParams = new URLSearchParams(window.location.search);
     const redirectUrl = decodeURIComponent(
-      searchParams.get('redirect_url') ?? '/records',
+      searchParams.get('redirect_url') ?? '/',
     );
     return <Navigate to={redirectUrl} />;
   }
