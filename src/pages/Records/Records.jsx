@@ -1,11 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import shallow from 'zustand/shallow';
 import Item from '../../components/Item';
 import RecordCard from '../../components/RecordCard';
 import NAVITEMS from './NavItems.json';
-import recordSeeder from '../../data/recordSeeder';
+import useStore from '../../store';
 
 const Records = () => {
+  const { records } = useStore((state) => {
+    return {
+      records: state.records,
+    };
+  }, shallow);
+
   return (
     <div className="h-full w-full p-3">
       <div className="flex h-[10%] justify-between">
@@ -23,7 +30,7 @@ const Records = () => {
         ))}
       </div>
       <div className="h-[83%] overflow-y-scroll shadow-md">
-        {recordSeeder().map((record) => (
+        {records.map((record) => (
           <RecordCard record={record} key={record.id} />
         ))}
       </div>

@@ -3,12 +3,8 @@ import Cookies from 'js-cookie';
 
 const JWT_TOKEN = 'JWT_TOKEN';
 const baseURL = 'http://localhost:3000/api';
-let jwtToken = '';
 const apiHelper = axios.create({
   baseURL,
-  headers: {
-    authorization: jwtToken,
-  },
 });
 
 export const getJWTToken = () => {
@@ -17,12 +13,12 @@ export const getJWTToken = () => {
 
 export const setToken = (token) => {
   Cookies.set(JWT_TOKEN, token);
-  jwtToken = `Bearer ${token}`;
+  apiHelper.defaults.headers.authorization = `Bearer ${token}`;
 };
 
 export const cleanToken = () => {
   Cookies.remove(JWT_TOKEN);
-  jwtToken = '';
+  delete apiHelper.defaults.headers.authorization;
 };
 
 export const verifyToken = (token) => {
@@ -65,11 +61,4 @@ export const fetchRegister = (userData) => {
       return data;
     })
     .catch((err) => console.log('axios error:', err.response.data.message));
-};
-
-export const fetchRecord = () => {
-  return apiHelper
-    .get('/records')
-    .then(({ data }) => console.log('Record:', data))
-    .catch((err) => console.log('fetchRecord error:', err));
 };

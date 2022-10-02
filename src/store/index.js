@@ -12,6 +12,7 @@ const initialState = {
   user: null,
   loading: false,
   registerSuccess: false,
+  records: [],
 };
 
 const useStore = create((set) => {
@@ -27,6 +28,7 @@ const useStore = create((set) => {
           .then((res) => {
             set({
               user: res.user,
+              records: res.user.Records,
             });
           })
           .catch((err) => console.log('error', err))
@@ -45,7 +47,10 @@ const useStore = create((set) => {
       set({ loading: true });
       fetchLogin(email, password)
         .then((res) => {
-          set({ user: res.user });
+          set({
+            user: res.user,
+            records: res.user.Records,
+          });
         })
         .catch((err) => console.log('fetchLogin error:', err))
         .finally(() => {

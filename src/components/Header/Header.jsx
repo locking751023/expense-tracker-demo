@@ -2,15 +2,14 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import NavItem from './NavItems.json';
 import style from './Header.module.scss';
-import useStore from '../../store';
 
-const Header = () => {
-  const onLogout = useStore((state) => state.onLogout);
+const Header = (props) => {
+  const { user, onLogout } = props;
 
   return (
     <div className={style.root}>
       <div className="flex h-full justify-between rounded-t-md bg-sky-300 p-5 shadow-lg">
-        <h1>記帳簿</h1>
+        <h1>{user.name}記帳簿</h1>
         <nav className="mt-auto">
           {NavItem.map((item) => (
             <NavLink

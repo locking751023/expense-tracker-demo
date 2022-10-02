@@ -1,24 +1,43 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import dayjs from 'dayjs';
 import Item from '../Item';
+import 'dayjs/locale/zh-tw';
+
+dayjs.locale('zh-tw');
 
 type RecordCardProps = {
-  cost: Number,
-  revenue: Number,
-  date: String,
-  local: String,
+  record: {
+    id: Number,
+    RecordedProducts: Object,
+    date: String,
+    Location: Object,
+  },
 };
 
 const RecordCard: React.FC<RecordCardProps> = (props) => {
-  const { id, cost, revenue, date, local } = props.record;
+  const { id, RecordedProducts, date, Location } = props.record;
+
+  const calcCost: Number = RecordedProducts.reduce((total, recordedProduct) => {
+    return Number(total + recordedProduct.historyCost * recordedProduct.amount);
+  }, 0);
+  const calcRevenue: Number = RecordedProducts.reduce(
+    (total, recordedProduct) => {
+      return Number(
+        total + recordedProduct.historyPrice * recordedProduct.amount,
+      );
+    },
+    0,
+  );
+
   return (
     <Link to={`/record/${id}`}>
       <div className="grid grid-cols-5 gap-1 border-b-2">
-        <Item item={date} />
-        <Item item={local} />
-        <Item item={cost} />
-        <Item item={revenue} />
-        <Item item={revenue - cost} />
+        <Item item={dayjs(date).format('YYYY/MM/DD(dd)')} />
+        <Item item={Location.name} />
+        <Item item={calcCost} />
+        <Item item={calcRevenue} />
+        <Item item={calcRevenue - calcCost || ''} />
       </div>
     </Link>
   );
