@@ -5,6 +5,7 @@ import {
   fetchLogin,
   cleanToken,
   fetchRegister,
+  fetchGetRecord,
 } from '../services/api';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   loading: false,
   registerSuccess: false,
   records: [],
+  record: [],
 };
 
 const useStore = create((set) => {
@@ -74,6 +76,15 @@ const useStore = create((set) => {
     onLogout() {
       cleanToken();
       window.location.reload();
+    },
+    getRecord(rid) {
+      set({ loading: true });
+      fetchGetRecord(rid)
+        .then((res) => {
+          set({ record: res.record });
+        })
+        .catch((err) => console.log('getRecord error', err))
+        .finally(() => set({ loading: false }));
     },
   };
 });

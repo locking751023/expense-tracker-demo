@@ -29,6 +29,7 @@ export const verifyToken = (token) => {
       },
     })
     .then(({ data }) => {
+      apiHelper.defaults.headers.authorization = `Bearer ${token}`;
       return data;
     })
     .catch((err) => {
@@ -49,7 +50,7 @@ export const fetchLogin = (email, password) => {
       setToken(data.data.token);
       return data.data;
     })
-    .catch((err) => console.log('axios error:', err.response.data.message));
+    .catch((err) => console.log('axios error:', err));
 };
 
 export const fetchRegister = (userData) => {
@@ -60,5 +61,14 @@ export const fetchRegister = (userData) => {
     .then(({ data }) => {
       return data;
     })
-    .catch((err) => console.log('axios error:', err.response.data.message));
+    .catch((err) => console.log('axios error:', err));
+};
+
+export const fetchGetRecord = (rid) => {
+  return apiHelper
+    .get(`/record/${rid}`)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => console.log('axios error:', err));
 };

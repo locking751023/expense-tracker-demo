@@ -33,10 +33,20 @@ const App = () => {
           }
         >
           <Route path="/" element={<Records />} />
-          <Route path="record/new" element={<NewRecord />} />
-          <Route path="record/:rid" element={<Record />} />
-          <Route path="record/:rid/edit" element={<EditRecord />} />
+          <Route path="record">
+            <Route path="new" element={<NewRecord />} />
+            <Route path=":rid" element={<Record />} />
+            <Route path=":rid/edit" element={<EditRecord />} />
+          </Route>
         </Route>
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: '1rem' }}>
+              <p>There is nothing here!</p>
+            </main>
+          }
+        />
       </Routes>
     </Router>
   );

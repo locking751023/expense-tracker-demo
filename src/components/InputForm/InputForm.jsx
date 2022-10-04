@@ -1,20 +1,12 @@
 import React from 'react';
 import { useController } from 'react-hook-form';
 import Item from '../Item';
+import { calSubTotal } from '../../helpers/calcHelper';
 
 type InputFormProps = {
   name: String,
   price: Number,
   unit: String,
-};
-
-const unitSwitch = (count, unit) => {
-  const tk = Math.floor(count / 1);
-  const tg = Math.round((count % 1) * 10);
-  if (unit === '兩') {
-    return tk * 16 + tg;
-  }
-  return Number(`${tk}.${tg}`);
 };
 
 const InputForm: React.FC<InputFormProps> = (props) => {
@@ -41,17 +33,10 @@ const InputForm: React.FC<InputFormProps> = (props) => {
 
   const count = amount.value - sendBack.value;
 
-  const calSubTotal = React.useCallback(
-    (prodCount) => {
-      return Math.round(price * unitSwitch(prodCount, unit)) || 0;
-    },
-    [price, unit],
-  );
-
   React.useEffect(() => {
-    setSubTotal(calSubTotal(count));
+    setSubTotal(calSubTotal(count, unit, price));
     setValue(`product.${name}.subTotalValue`, subTotal);
-  }, [calSubTotal, count, setValue, name, subTotal]);
+  }, [count, unit, price, setValue, name, subTotal]);
 
   return (
     <div className="grid grid-cols-6 gap-1 border-b-2 p-1">

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Item from '../../components/Item';
 import InputForm from '../../components/InputForm';
-import NAVITEMS from '../Record/NavItems.json';
+import NAVITEMS from '../../store/NavItems.json';
 import productSeeder from '../../data/productSeeder';
 import locationSeeder from '../../data/locationSeeder';
 import recordSeeder from '../../data/recordSeeder';
