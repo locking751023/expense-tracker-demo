@@ -3,17 +3,10 @@ import { useController } from 'react-hook-form';
 import Item from '../Item';
 import { calSubTotal } from '../../helpers/calcHelper';
 
-type InputFormProps = {
-  name: String,
-  price: Number,
-  unit: String,
-};
-
-const InputForm: React.FC<InputFormProps> = (props) => {
+const InputForm = (props) => {
   const { control, setValue, product } = props;
-  const { name, price, unit } = product;
+  const { id, name, price, unit } = product;
   const [subTotal, setSubTotal] = React.useState();
-
   const { field: amount } = useController({
     name: `product.${name}.amount`,
     control,
@@ -29,6 +22,11 @@ const InputForm: React.FC<InputFormProps> = (props) => {
     control,
     rules: { required: true },
     defaultValue: 0,
+  });
+  const { field: productId } = useController({
+    name: `product.${name}.id`,
+    control,
+    defaultValue: id,
   });
 
   const count = amount.value - sendBack.value;
@@ -65,6 +63,7 @@ const InputForm: React.FC<InputFormProps> = (props) => {
         disabled
         {...subTotalValue}
       />
+      <input type="number" className="hidden" disabled {...productId} />
     </div>
   );
 };

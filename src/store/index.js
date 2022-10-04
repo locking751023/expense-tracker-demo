@@ -5,7 +5,11 @@ import {
   fetchLogin,
   cleanToken,
   fetchRegister,
+  fetchGetRecords,
   fetchGetRecord,
+  fetchGetProducts,
+  fetchGetLocations,
+  fetchDeleteRecord,
 } from '../services/api';
 
 const initialState = {
@@ -15,6 +19,8 @@ const initialState = {
   registerSuccess: false,
   records: [],
   record: [],
+  products: [],
+  locations: [],
 };
 
 const useStore = create((set) => {
@@ -77,14 +83,48 @@ const useStore = create((set) => {
       cleanToken();
       window.location.reload();
     },
+    getRecords() {
+      set({ loading: true });
+      fetchGetRecords()
+        .then((res) => {
+          set({ records: res.records });
+        })
+        .catch((err) => console.log('getRecord error:', err))
+        .finally(() => set({ loading: false }));
+    },
     getRecord(rid) {
       set({ loading: true });
       fetchGetRecord(rid)
         .then((res) => {
           set({ record: res.record });
         })
-        .catch((err) => console.log('getRecord error', err))
+        .catch((err) => console.log('getRecord error:', err))
         .finally(() => set({ loading: false }));
+    },
+    getProducts() {
+      set({ loading: true });
+      fetchGetProducts()
+        .then((res) => {
+          set({ products: res.products });
+        })
+        .catch((err) => console.log('fetchGetProducts error:', err))
+        .finally(() => set({ loading: false }));
+    },
+    getLocations() {
+      set({ loading: true });
+      fetchGetLocations()
+        .then((res) => {
+          set({ locations: res.locations });
+        })
+        .catch((err) => console.log('fetchGetLocations error:', err))
+        .finally(() => set({ loading: false }));
+    },
+    deleteRecord(rid) {
+      return fetchDeleteRecord(rid)
+        .then((res) => {
+          return res;
+        })
+        .catch((err) => console.log('deleteRecord error:', err));
     },
   };
 });

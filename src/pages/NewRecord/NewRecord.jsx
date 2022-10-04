@@ -1,13 +1,14 @@
-import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Item from '../../components/Item';
 import InputForm from '../../components/InputForm';
 import NAVITEMS from '../../store/NavItems.json';
-import productSeeder from '../../data/productSeeder';
-import locationSeeder from '../../data/locationSeeder';
+import useStore from '../../store';
+import { fetchPostNewRecord } from '../../services/api';
 
 const NewRecord = () => {
+  const [postNewRecord, setPostNewRecord] = React.useState();
   const formMethod = useForm({ mode: 'onChange' });
   const {
     register,
@@ -17,20 +18,53 @@ const NewRecord = () => {
     formState: { errors },
   } = formMethod;
 
-  const calRevenue = useCallback((data) => {
-    const revenue = Object.values(data.product).reduce((total, currentItem) => {
-      return total + currentItem.subTotalValue;
-    }, 0);
-    return revenue;
-  }, []);
+  const { products, loading, locations, getProducts, getLocations } = useStore(
+    (state) => {
+      return {
+        products: state.products,
+        loading: state.loading,
+        locations: state.locations,
+        getProducts: state.getProducts,
+        getLocations: state.getLocations,
+      };
+    },
+  );
 
-  const atSubmit = (data) => {
-    const newData = {
-      ...data,
-      revenue: calRevenue(data),
+  const atSubmit = (submitData) => {
+    const newProducts = Object.values(submitData.product).map((data) => {
+      const product = products.find((item) => {
+        return item.id === data.id;
+      });
+      return {
+        productId: data.id,
+        historyPrice: product.price,
+        historyCost: product.cost,
+        amount: Number(data.amount),
+        sendBack: Number(data.sendBack),
+      };
+    });
+    const newRecord = {
+      date: submitData.date,
+      locationId: Number(submitData.location),
+      products: Object.values(newProducts),
     };
-    console.log('newData:', newData);
+    fetchPostNewRecord(newRecord)
+      .then((res) => setPostNewRecord(res.data.status))
+      .catch((err) => setPostNewRecord(err));
   };
+
+  React.useEffect(() => {
+    getProducts();
+    getLocations();
+  }, [getProducts, getLocations]);
+
+  if (postNewRecord === 'success') {
+    return <Navigate to="/" />;
+  }
+
+  if (loading) {
+    return <div className="my-spinner">Loading</div>;
+  }
 
   return (
     <form onSubmit={handleSubmit(atSubmit)} className="h-full w-full p-3">
@@ -57,8 +91,8 @@ const NewRecord = () => {
                 className="rounded-md border-2 bg-gray-100 p-1"
               >
                 <option value="">請選擇地點</option>
-                {locationSeeder.map(({ id, name }) => (
-                  <option key={id} value={name}>
+                {locations?.map(({ id, name }) => (
+                  <option key={id} value={id}>
                     {name}
                   </option>
                 ))}
@@ -84,7 +118,7 @@ const NewRecord = () => {
         ))}
       </div>
       <div className="max-h-[83%] overflow-y-scroll shadow-md">
-        {productSeeder.map((product) => (
+        {products?.map((product) => (
           <InputForm
             product={product}
             control={control}

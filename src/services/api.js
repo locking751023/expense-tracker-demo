@@ -64,9 +64,56 @@ export const fetchRegister = (userData) => {
     .catch((err) => console.log('axios error:', err));
 };
 
+export const fetchGetRecords = () => {
+  return apiHelper
+    .get('/records')
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => console.log('axios error:', err));
+};
+
 export const fetchGetRecord = (rid) => {
   return apiHelper
     .get(`/record/${rid}`)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => console.log('axios error:', err));
+};
+
+export const fetchGetProducts = () => {
+  return apiHelper
+    .get('/products')
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => console.log('axios error:', err));
+};
+
+export const fetchGetLocations = () => {
+  return apiHelper
+    .get('/locations')
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => console.log('axios error:', err));
+};
+
+export const fetchPostNewRecord = (data) => {
+  return apiHelper
+    .post('/record/new', {
+      data,
+    })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.log('axios error:', err));
+};
+
+export const fetchDeleteRecord = (rid) => {
+  return apiHelper
+    .delete(`/record/${rid}`)
     .then(({ data }) => {
       return data;
     })

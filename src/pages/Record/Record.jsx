@@ -9,19 +9,27 @@ import useStore from '../../store';
 import { calSubTotal } from '../../helpers/calcHelper';
 
 const Record = () => {
+  const [deleteRecordRes, setDeleteRecordRes] = React.useState();
   const params = useParams().rid;
-  const { user, record, getRecord, loading } = useStore((state) => {
-    return {
-      user: state.user,
-      record: state.record,
-      loading: state.loading,
-      getRecord: state.getRecord,
-    };
-  }, shallow);
+  const { user, record, getRecord, loading, deleteRecord } = useStore(
+    (state) => {
+      return {
+        user: state.user,
+        record: state.record,
+        loading: state.loading,
+        getRecord: state.getRecord,
+        deleteRecord: state.deleteRecord,
+      };
+    },
+    shallow,
+  );
   const isRecord = user.Records.some((data) => data.id === Number(params));
-
   if (!isRecord) return <Navigate to="*" />;
 
+  const atDeleteRecord = async () => {
+    const res = await deleteRecord(params);
+    setDeleteRecordRes(res.status);
+  };
   // eslint-disable-next-line react-hooks/rules-of-hooks
   React.useEffect(() => {
     getRecord(params);
@@ -29,6 +37,9 @@ const Record = () => {
 
   if (loading) {
     return <div className="my-spinner">Loading</div>;
+  }
+  if (deleteRecordRes === 'success') {
+    return <Navigate to="/" />;
   }
 
   const { RecordedProducts = [], date, Location = '' } = record;
@@ -56,7 +67,14 @@ const Record = () => {
           >
             編輯
           </Link>
-          <button className="btn mx-2 bg-danger text-white">刪除</button>
+          <button
+            onClick={() => {
+              atDeleteRecord();
+            }}
+            className="btn mx-2 bg-danger text-white"
+          >
+            刪除
+          </button>
         </div>
       </header>
       <div className="grid h-[8%] grid-cols-6 gap-1 border-b-2 border-gray-500">

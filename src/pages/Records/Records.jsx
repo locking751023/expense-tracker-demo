@@ -7,11 +7,21 @@ import NAVITEMS from './NavItems.json';
 import useStore from '../../store';
 
 const Records = () => {
-  const { records } = useStore((state) => {
+  const { loading, records, getRecords } = useStore((state) => {
     return {
+      loading: state.loading,
       records: state.records,
+      getRecords: state.getRecords,
     };
   }, shallow);
+
+  React.useEffect(() => {
+    getRecords();
+  }, [getRecords]);
+
+  if (loading) {
+    return <div className="my-spinner">Loading</div>;
+  }
 
   return (
     <div className="h-full w-full p-3">
