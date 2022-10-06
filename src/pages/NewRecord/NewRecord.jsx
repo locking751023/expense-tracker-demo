@@ -5,10 +5,8 @@ import Item from '../../components/Item';
 import InputForm from '../../components/InputForm';
 import NAVITEMS from '../../store/NavItems.json';
 import useStore from '../../store';
-import { fetchPostNewRecord } from '../../services/api';
 
 const NewRecord = () => {
-  const [postNewRecord, setPostNewRecord] = React.useState();
   const formMethod = useForm({ mode: 'onChange' });
   const {
     register,
@@ -18,17 +16,25 @@ const NewRecord = () => {
     formState: { errors },
   } = formMethod;
 
-  const { products, loading, locations, getProducts, getLocations } = useStore(
-    (state) => {
-      return {
-        products: state.products,
-        loading: state.loading,
-        locations: state.locations,
-        getProducts: state.getProducts,
-        getLocations: state.getLocations,
-      };
-    },
-  );
+  const {
+    products,
+    loading,
+    locations,
+    getProducts,
+    getLocations,
+    postNewRecord,
+    postRecordSuccess,
+  } = useStore((state) => {
+    return {
+      products: state.products,
+      loading: state.loading,
+      locations: state.locations,
+      getProducts: state.getProducts,
+      getLocations: state.getLocations,
+      postNewRecord: state.postNewRecord,
+      postRecordSuccess: state.postRecordSuccess,
+    };
+  });
 
   const atSubmit = (submitData) => {
     const newProducts = Object.values(submitData.product).map((data) => {
@@ -48,9 +54,7 @@ const NewRecord = () => {
       locationId: Number(submitData.location),
       products: Object.values(newProducts),
     };
-    fetchPostNewRecord(newRecord)
-      .then((res) => setPostNewRecord(res.data.status))
-      .catch((err) => setPostNewRecord(err));
+    postNewRecord(newRecord);
   };
 
   React.useEffect(() => {
@@ -58,7 +62,7 @@ const NewRecord = () => {
     getLocations();
   }, [getProducts, getLocations]);
 
-  if (postNewRecord === 'success') {
+  if (postRecordSuccess) {
     return <Navigate to="/" />;
   }
 

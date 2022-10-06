@@ -11,6 +11,9 @@ import EditRecord from '../../pages/EditRecord';
 import useStore from '../../store';
 import ProtectRoute from '../../containers/ProtectedRoute';
 
+// TODO 登入狀態無法進入login、register 頁面
+// TODO 修改 calSubTotal 計算公式
+
 const App = () => {
   const init = useStore((state) => state.init);
   useEffect(() => {

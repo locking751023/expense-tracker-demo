@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import shallow from 'zustand/shallow';
+import Swal from 'sweetalert2';
 import Item from '../../components/Item';
 import ProductCard from '../../components/ProductCard';
 import NAVITEMS from '../../store/NavItems.json';
@@ -9,56 +10,64 @@ import useStore from '../../store';
 import { calSubTotal } from '../../helpers/calcHelper';
 
 const Record = () => {
-  const [deleteRecordRes, setDeleteRecordRes] = React.useState();
+  const [deleteRecordSuccess, setDeleteRecordSuccess] = React.useState(false);
   const params = useParams().rid;
-  const { user, record, getRecord, loading, deleteRecord } = useStore(
-    (state) => {
-      return {
-        user: state.user,
-        record: state.record,
-        loading: state.loading,
-        getRecord: state.getRecord,
-        deleteRecord: state.deleteRecord,
-      };
-    },
-    shallow,
-  );
-  const isRecord = user.Records.some((data) => data.id === Number(params));
-  if (!isRecord) return <Navigate to="*" />;
+  const { record, getRecord, deleteRecord } = useStore((state) => {
+    return {
+      user: state.user,
+      record: state.record,
+      getRecord: state.getRecord,
+      deleteRecord: state.deleteRecord,
+    };
+  }, shallow);
+  const { RecordedProducts, date, Location } = record;
+
+  const recordDate = () => {
+    if (date) return dayjs(date).format('YYYY/MM/DD (dd)');
+    return '';
+  };
 
   const atDeleteRecord = async () => {
-    const res = await deleteRecord(params);
-    setDeleteRecordRes(res.status);
+    const result = await Swal.fire({
+      title: '確定要刪除這筆記錄?',
+      text: '刪除後無法復原!!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '刪除!',
+    });
+    if (result.isConfirmed) {
+      const res = await deleteRecord(params);
+      if (res.status === 'success') {
+        Swal.fire('記錄已成功刪除');
+        setDeleteRecordSuccess(true);
+      }
+    }
   };
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+
+  const calcRevenue: Number = RecordedProducts?.reduce(
+    (total, recordedProduct) => {
+      const { amount, historyPrice, Product } = recordedProduct;
+      return Number(total + calSubTotal(amount, Product?.unit, historyPrice));
+    },
+    0,
+  );
+
   React.useEffect(() => {
     getRecord(params);
   }, [params, getRecord]);
 
-  if (loading) {
-    return <div className="my-spinner">Loading</div>;
-  }
-  if (deleteRecordRes === 'success') {
+  if (deleteRecordSuccess) {
     return <Navigate to="/" />;
   }
-
-  const { RecordedProducts = [], date, Location = '' } = record;
-  const calcRevenue: Number = RecordedProducts.reduce(
-    (total, recordedProduct) => {
-      const { amount, historyPrice, Product } = recordedProduct;
-      return Number(total + calSubTotal(amount, Product.unit, historyPrice));
-    },
-    0,
-  );
 
   return (
     <div className="h-full w-full px-2">
       <header className="flex h-[10%] justify-between">
         <div className="flex flex-col sm:flex-row">
-          <h2 className="m-2 sm:my-2">
-            日期：{dayjs(date).format('YYYY/MM/DD (dd)')}
-          </h2>
-          <h2 className="m-2 sm:my-2">地點：{Location.name}</h2>
+          <h2 className="m-2 sm:my-2">日期：{recordDate()}</h2>
+          <h2 className="m-2 sm:my-2">地點：{Location?.name}</h2>
         </div>
         <div className="my-auto flex ">
           <Link
@@ -83,7 +92,7 @@ const Record = () => {
         ))}
       </div>
       <div className="max-h-[74%] overflow-y-scroll shadow-md">
-        {RecordedProducts.map((product) => (
+        {RecordedProducts?.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}
       </div>

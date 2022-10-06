@@ -48,9 +48,11 @@ export const fetchLogin = (email, password) => {
     })
     .then(({ data }) => {
       setToken(data.data.token);
-      return data.data;
+      return data;
     })
-    .catch((err) => console.log('axios error:', err));
+    .catch((err) => {
+      return err;
+    });
 };
 
 export const fetchRegister = (userData) => {
@@ -61,7 +63,9 @@ export const fetchRegister = (userData) => {
     .then(({ data }) => {
       return data;
     })
-    .catch((err) => console.log('axios error:', err));
+    .catch((err) => {
+      return err;
+    });
 };
 
 export const fetchGetRecords = () => {
@@ -79,7 +83,9 @@ export const fetchGetRecord = (rid) => {
     .then(({ data }) => {
       return data;
     })
-    .catch((err) => console.log('axios error:', err));
+    .catch((err) => {
+      return err;
+    });
 };
 
 export const fetchGetProducts = () => {
@@ -108,7 +114,9 @@ export const fetchPostNewRecord = (data) => {
     .then((res) => {
       return res;
     })
-    .catch((err) => console.log('axios error:', err));
+    .catch((err) => {
+      return err;
+    });
 };
 
 export const fetchDeleteRecord = (rid) => {
@@ -117,5 +125,7 @@ export const fetchDeleteRecord = (rid) => {
     .then(({ data }) => {
       return data;
     })
-    .catch((err) => console.log('axios error:', err));
+    .catch((err) => {
+      return err;
+    });
 };

@@ -1,4 +1,5 @@
 import create from 'zustand';
+import { toastHelper } from '../helpers/swalHelper';
 import {
   getJWTToken,
   verifyToken,
@@ -10,6 +11,7 @@ import {
   fetchGetProducts,
   fetchGetLocations,
   fetchDeleteRecord,
+  fetchPostNewRecord,
 } from '../services/api';
 
 const initialState = {
@@ -21,6 +23,7 @@ const initialState = {
   record: [],
   products: [],
   locations: [],
+  postRecordSuccess: false,
 };
 
 const useStore = create((set) => {
@@ -55,28 +58,39 @@ const useStore = create((set) => {
       set({ loading: true });
       fetchLogin(email, password)
         .then((res) => {
-          set({
-            user: res.user,
-            records: res.user.Records,
-          });
+          const { response, data, status } = res;
+          if (status === 'success') {
+            set({
+              user: data.user,
+              records: data.user.Records,
+            });
+            toastHelper('登入成功', status);
+          }
+
+          if (response) {
+            toastHelper(response.data.message, 'error');
+          }
         })
-        .catch((err) => console.log('fetchLogin error:', err))
+        .catch((err) => console.log('onLogin error:', err))
         .finally(() => {
           set({ loading: false });
         });
     },
     onRegister(userData) {
-      set({ loading: true });
       fetchRegister(userData)
         .then((res) => {
-          console.log('register success:', res);
-          set({ registerSuccess: true });
+          const { response, message, status } = res;
+          if (status === 'success') {
+            set({ registerSuccess: true });
+            toastHelper(message, status);
+          }
+          if (response) {
+            toastHelper(response.data.message, 'error');
+          }
         })
-        .catch((err) => {
-          console.log('register error:', err);
-        })
+        .catch((err) => console.log('onRegister error:', err))
         .finally(() => {
-          set({ loading: false });
+          set({ registerSuccess: false });
         });
     },
     onLogout() {
@@ -96,7 +110,15 @@ const useStore = create((set) => {
       set({ loading: true });
       fetchGetRecord(rid)
         .then((res) => {
-          set({ record: res.record });
+          if (res.record) {
+            return set({ record: res.record });
+          }
+          return toastHelper('查無資料', 'warning', {
+            position: 'center',
+            timer: false,
+            timerProgressBar: false,
+            showConfirmButton: true,
+          });
         })
         .catch((err) => console.log('getRecord error:', err))
         .finally(() => set({ loading: false }));
@@ -119,12 +141,31 @@ const useStore = create((set) => {
         .catch((err) => console.log('fetchGetLocations error:', err))
         .finally(() => set({ loading: false }));
     },
-    deleteRecord(rid) {
+    postNewRecord(newRecord) {
+      fetchPostNewRecord(newRecord)
+        .then((res) => {
+          const { data, response } = res;
+          if (data?.status === 'success') {
+            toastHelper('新增成功', data.status);
+            set({ postRecordSuccess: true });
+          }
+          if (response?.data.status === 'error') {
+            toastHelper(response.data.message, response.data.status);
+          }
+        })
+        .catch((err) => console.log('postNewRecord error:', err))
+        .finally(() => {
+          set({ postRecordSuccess: false });
+        });
+    },
+    async deleteRecord(rid) {
       return fetchDeleteRecord(rid)
         .then((res) => {
           return res;
         })
-        .catch((err) => console.log('deleteRecord error:', err));
+        .catch((err) => {
+          return err;
+        });
     },
   };
 });

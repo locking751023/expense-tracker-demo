@@ -4,6 +4,8 @@
     "NAVITEMS",
     "plopfile",
     "PRODUCTLIST",
+    "Swal",
+    "sweetalert",
     "zustand"
   ]
 }
