@@ -4,18 +4,30 @@ import Item from '../Item';
 import { calSubTotal } from '../../helpers/calcHelper';
 
 const InputForm = (props) => {
-  const { control, setValue, product } = props;
+  const { control, setValue, product, recordedProducts } = props;
   const { id, name, price, unit } = product;
   const [subTotal, setSubTotal] = React.useState();
+  const defValues = recordedProducts?.find((item) => {
+    if (item.productId === id) {
+      return {
+        amount: item.amount,
+        sendBack: item.sendBack,
+      };
+    }
+    return null;
+  });
+
   const { field: amount } = useController({
     name: `product.${name}.amount`,
     control,
     rules: { required: true },
+    defaultValue: defValues?.amount,
   });
   const { field: sendBack } = useController({
     name: `product.${name}.sendBack`,
     control,
     rules: { required: true },
+    defaultValue: defValues?.sendBack,
   });
   const { field: subTotalValue } = useController({
     name: `product.${name}.subTotalValue`,

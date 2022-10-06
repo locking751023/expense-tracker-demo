@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Item from '../../components/Item';
 import InputForm from '../../components/InputForm';
@@ -7,6 +7,7 @@ import NAVITEMS from '../../store/NavItems.json';
 import useStore from '../../store';
 
 const NewRecord = () => {
+  const navigate = useNavigate();
   const formMethod = useForm({ mode: 'onChange' });
   const {
     register,
@@ -79,8 +80,8 @@ const NewRecord = () => {
               日期：
               <input
                 type="date"
-                {...register('date', { required: '日期為必填' })}
                 className="rounded-md border-2 bg-gray-100 p-1"
+                {...register('date', { required: '日期為必填' })}
               />
             </label>
             <small className="mt-auto text-red-400">
@@ -91,8 +92,8 @@ const NewRecord = () => {
             <label>
               地點：
               <select
-                {...register('location', { required: '請選擇地點' })}
                 className="rounded-md border-2 bg-gray-100 p-1"
+                {...register('location', { required: '請選擇地點' })}
               >
                 <option value="">請選擇地點</option>
                 {locations?.map(({ id, name }) => (
@@ -111,9 +112,12 @@ const NewRecord = () => {
           <button type="submit" className="btn mx-2 bg-success text-white">
             儲存
           </button>
-          <Link to="/" className="btn mx-2 bg-light text-white">
+          <button
+            onClick={() => navigate(-1)}
+            className="btn mx-2 bg-light text-white"
+          >
             取消
-          </Link>
+          </button>
         </div>
       </header>
       <div className="grid h-[8%] grid-cols-6 gap-1 border-b-2 border-gray-500">

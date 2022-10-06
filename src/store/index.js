@@ -12,6 +12,7 @@ import {
   fetchGetLocations,
   fetchDeleteRecord,
   fetchPostNewRecord,
+  fetchPutRecord,
 } from '../services/api';
 
 const initialState = {
@@ -158,7 +159,7 @@ const useStore = create((set) => {
           set({ postRecordSuccess: false });
         });
     },
-    async deleteRecord(rid) {
+    deleteRecord(rid) {
       return fetchDeleteRecord(rid)
         .then((res) => {
           return res;
@@ -166,6 +167,18 @@ const useStore = create((set) => {
         .catch((err) => {
           return err;
         });
+    },
+    updateRecord(rid, newRecord) {
+      fetchPutRecord(rid, newRecord)
+        .then((res) => {
+          if (res.data.status === 'success') {
+            set({ updateRecordSuccess: true });
+            return toastHelper('資料修改成功', 'success');
+          }
+          return toastHelper('資料修改失敗', 'error');
+        })
+        .catch((err) => console.log('updateRecord error:', err))
+        .finally(() => set({ updateRecordSuccess: false }));
     },
   };
 });

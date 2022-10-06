@@ -108,9 +108,7 @@ export const fetchGetLocations = () => {
 
 export const fetchPostNewRecord = (data) => {
   return apiHelper
-    .post('/record/new', {
-      data,
-    })
+    .post('/record/new', { data })
     .then((res) => {
       return res;
     })
@@ -124,6 +122,17 @@ export const fetchDeleteRecord = (rid) => {
     .delete(`/record/${rid}`)
     .then(({ data }) => {
       return data;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+export const fetchPutRecord = (rid, data) => {
+  return apiHelper
+    .put(`/record/${rid}/edit`, { data })
+    .then((res) => {
+      return res;
     })
     .catch((err) => {
       return err;
