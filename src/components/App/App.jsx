@@ -13,7 +13,6 @@ import ProtectRoute from '../../containers/ProtectedRoute/ProtectedRoute';
 import SingPageProtected from '../../containers/SingPageProtected/SingPageProtected';
 
 // TODO 修改 calSubTotal 計算公式
-// TODO 小數點顯示問題
 
 const App = () => {
   const { init, isAppInitializedComplete } = useStore((state) => {
@@ -61,6 +60,22 @@ const App = () => {
             <Route path=":rid" element={<Record />} />
             <Route path=":rid/edit" element={<EditRecord />} />
           </Route>
+          <Route
+            path="/report"
+            element={
+              <div className="flex h-full w-full justify-center">
+                <p className="my-auto text-5xl">施工中...</p>
+              </div>
+            }
+          />
+          <Route
+            path="/setting"
+            element={
+              <div className="flex h-full w-full justify-center">
+                <p className="my-auto text-5xl">施工中...</p>
+              </div>
+            }
+          />
         </Route>
         <Route
           path="*"

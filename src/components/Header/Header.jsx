@@ -8,9 +8,11 @@ const Header = (props) => {
 
   return (
     <div className={style.root}>
-      <div className="flex h-full justify-between rounded-t-md bg-sky-300 p-5 shadow-lg">
-        <h1>{user.name}記帳簿</h1>
-        <nav className="mt-auto">
+      <div className="flex h-full flex-col justify-between rounded-t-md bg-sky-300 p-5 shadow-lg sm:flex-row">
+        <h1 className="mb-2 sm:mb-0 sm:flex sm:flex-col sm:justify-center">
+          {user.name} 記帳簿
+        </h1>
+        <nav className="mt-auto flex justify-end">
           {NavItem.map((item) => (
             <NavLink
               key={item.name}
