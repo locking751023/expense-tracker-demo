@@ -64,6 +64,7 @@ const useStore = create((set) => {
             set({
               user: data.user,
               records: data.user.Records,
+              loading: false,
             });
             toastHelper('登入成功', status);
           }
@@ -102,7 +103,7 @@ const useStore = create((set) => {
       set({ loading: true });
       fetchGetRecords()
         .then((res) => {
-          set({ records: res.records });
+          set({ records: res.records, loading: false });
         })
         .catch((err) => console.log('getRecord error:', err))
         .finally(() => set({ loading: false }));
@@ -112,7 +113,7 @@ const useStore = create((set) => {
       fetchGetRecord(rid)
         .then((res) => {
           if (res.record) {
-            return set({ record: res.record });
+            return set({ record: res.record, loading: false });
           }
           return toastHelper('查無資料', 'warning', {
             position: 'center',
@@ -128,7 +129,7 @@ const useStore = create((set) => {
       set({ loading: true });
       fetchGetProducts()
         .then((res) => {
-          set({ products: res.products });
+          set({ products: res.products, loading: false });
         })
         .catch((err) => console.log('fetchGetProducts error:', err))
         .finally(() => set({ loading: false }));
@@ -137,7 +138,7 @@ const useStore = create((set) => {
       set({ loading: true });
       fetchGetLocations()
         .then((res) => {
-          set({ locations: res.locations });
+          set({ locations: res.locations, loading: false });
         })
         .catch((err) => console.log('fetchGetLocations error:', err))
         .finally(() => set({ loading: false }));

@@ -9,8 +9,8 @@ import Record from '../../pages/Record';
 import NewRecord from '../../pages/NewRecord';
 import EditRecord from '../../pages/EditRecord';
 import useStore from '../../store';
-import ProtectRoute from '../../containers/ProtectedRoute';
-import SingPageProtected from '../../containers/SingPageProtected';
+import ProtectRoute from '../../containers/ProtectedRoute/ProtectedRoute';
+import SingPageProtected from '../../containers/SingPageProtected/SingPageProtected';
 
 // TODO 修改 calSubTotal 計算公式
 // TODO 小數點顯示問題
