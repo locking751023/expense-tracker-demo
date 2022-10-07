@@ -10,11 +10,10 @@ import useStore from '../../store';
 import { calSubTotal } from '../../helpers/calcHelper';
 
 const Record = () => {
-  const [deleteRecordSuccess, setDeleteRecordSuccess] = React.useState(false);
   const params = useParams().rid;
+  const [deleteRecordSuccess, setDeleteRecordSuccess] = React.useState(false);
   const { record, getRecord, deleteRecord } = useStore((state) => {
     return {
-      user: state.user,
       record: state.record,
       getRecord: state.getRecord,
       deleteRecord: state.deleteRecord,
@@ -56,7 +55,7 @@ const Record = () => {
 
   React.useEffect(() => {
     getRecord(params);
-  }, [params, getRecord]);
+  }, []);// eslint-disable-line
 
   if (deleteRecordSuccess) {
     return <Navigate to="/" />;

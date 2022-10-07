@@ -1,10 +1,13 @@
 import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+export const MySwal = withReactContent(Swal);
 
 const Toast = Swal.mixin({
   toast: true,
-  position: 'top',
+  position: 'center',
   showConfirmButton: false,
-  timer: 3000,
+  timer: 2000,
   timerProgressBar: true,
   didOpen: (toast) => {
     toast.addEventListener('mouseenter', Swal.stopTimer);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import shallow from 'zustand/shallow';
 import useStore from '../../store';
@@ -10,9 +10,8 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { user, onLogin } = useStore((state) => {
+  const { onLogin } = useStore((state) => {
     return {
-      user: state.user,
       onLogin: state.onLogin,
     };
   }, shallow);
@@ -20,14 +19,6 @@ const Login = () => {
   const atSubmit = (data) => {
     onLogin(data.email, data.password);
   };
-
-  if (user) {
-    const searchParams = new URLSearchParams(window.location.search);
-    const redirectUrl = decodeURIComponent(
-      searchParams.get('redirect_url') ?? '/',
-    );
-    return <Navigate to={redirectUrl} />;
-  }
 
   return (
     <form

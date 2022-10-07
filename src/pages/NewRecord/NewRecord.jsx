@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Item from '../../components/Item';
 import InputForm from '../../components/InputForm';
@@ -7,7 +7,6 @@ import NAVITEMS from '../../store/NavItems.json';
 import useStore from '../../store';
 
 const NewRecord = () => {
-  const navigate = useNavigate();
   const formMethod = useForm({ mode: 'onChange' });
   const {
     register,
@@ -112,12 +111,9 @@ const NewRecord = () => {
           <button type="submit" className="btn mx-2 bg-success text-white">
             儲存
           </button>
-          <button
-            onClick={() => navigate(-1)}
-            className="btn mx-2 bg-light text-white"
-          >
+          <Link to="/" className="btn mx-2 bg-light text-white">
             取消
-          </button>
+          </Link>
         </div>
       </header>
       <div className="grid h-[8%] grid-cols-6 gap-1 border-b-2 border-gray-500">

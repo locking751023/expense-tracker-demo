@@ -10,21 +10,40 @@ import NewRecord from '../../pages/NewRecord';
 import EditRecord from '../../pages/EditRecord';
 import useStore from '../../store';
 import ProtectRoute from '../../containers/ProtectedRoute';
+import SingPageProtected from '../../containers/SingPageProtected';
 
-// TODO 登入狀態無法進入login、register 頁面
 // TODO 修改 calSubTotal 計算公式
 // TODO 小數點顯示問題
 
 const App = () => {
-  const init = useStore((state) => state.init);
+  const { init, isAppInitializedComplete } = useStore((state) => {
+    return {
+      init: state.init,
+      isAppInitializedComplete: state.isAppInitializedComplete,
+    };
+  });
   useEffect(() => {
     init();
   }, []); // eslint-disable-line
+  if (!isAppInitializedComplete) {
+    return (
+      <div className="flex h-full w-full justify-center">
+        <div className="my-auto">載入中...</div>
+      </div>
+    );
+  }
 
   return (
     <Router>
       <Routes>
-        <Route path="user" element={<User />}>
+        <Route
+          path="user"
+          element={
+            <SingPageProtected>
+              <User />
+            </SingPageProtected>
+          }
+        >
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
@@ -46,8 +65,8 @@ const App = () => {
         <Route
           path="*"
           element={
-            <main style={{ padding: '1rem' }}>
-              <p>There is nothing here!</p>
+            <main className="p-4">
+              <p>找不到頁面!!</p>
             </main>
           }
         />

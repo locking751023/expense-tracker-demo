@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useParams, Navigate, Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import dayjs from 'dayjs';
 import Item from '../../components/Item';
@@ -8,7 +8,7 @@ import NAVITEMS from '../../store/NavItems.json';
 import useStore from '../../store';
 
 const EditRecord = () => {
-  const navigate = useNavigate();
+  const params = useParams().rid;
   const {
     loading,
     record,
@@ -124,12 +124,12 @@ const EditRecord = () => {
           <button type="submit" className="btn mx-2 bg-success text-white">
             儲存
           </button>
-          <button
-            onClick={() => navigate(-1)}
+          <Link
+            to={`/record/${params}`}
             className="btn mx-2 bg-light text-white"
           >
             取消
-          </button>
+          </Link>
         </div>
       </header>
       <div className="grid h-[8%] grid-cols-6 gap-1 border-b-2 border-gray-500">

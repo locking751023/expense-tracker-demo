@@ -17,7 +17,7 @@ const Records = () => {
 
   React.useEffect(() => {
     getRecords();
-  }, [getRecords]);
+  }, []);// eslint-disable-line
 
   if (loading) {
     return <div className="my-spinner">Loading</div>;

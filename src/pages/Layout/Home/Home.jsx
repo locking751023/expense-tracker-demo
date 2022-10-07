@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import shallow from 'zustand/shallow';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import useStore from '../../../store';
@@ -10,7 +11,7 @@ const Home = () => {
       user: state.user,
       onLogout: state.onLogout,
     };
-  });
+  }, shallow);
   return (
     <div className="h-full bg-[url('/src/assets/images/home.jpg')] bg-cover bg-center bg-no-repeat">
       <div className="container mx-auto flex h-full flex-col p-2">
