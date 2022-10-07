@@ -3,6 +3,7 @@
     "classname",
     "NAVITEMS",
     "plopfile",
+    "predeploy",
     "PRODUCTLIST",
     "Swal",
     "sweetalert",
