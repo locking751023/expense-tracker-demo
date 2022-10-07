@@ -21,7 +21,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
       <Item item={Product.unit} />
       <Item item={amount} />
       <Item item={sendBack} />
-      <Item item={calSubTotal(amount, Product.unit, historyPrice)} />
+      <Item item={calSubTotal(amount, sendBack, Product?.unit, historyPrice)} />
     </div>
   );
 };

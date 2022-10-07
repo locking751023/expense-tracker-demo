@@ -41,12 +41,10 @@ const InputForm = (props) => {
     defaultValue: id,
   });
 
-  const count = amount.value - sendBack.value;
-
   React.useEffect(() => {
-    setSubTotal(calSubTotal(count, unit, price));
+    setSubTotal(calSubTotal(amount?.value, sendBack?.value, unit, price));
     setValue(`product.${name}.subTotalValue`, subTotal);
-  }, [count, unit, price, setValue, name, subTotal]);
+  }, [amount, sendBack, unit, price, setValue, name, subTotal]);
 
   return (
     <div className="grid grid-cols-6 gap-1 border-b-2 p-1">

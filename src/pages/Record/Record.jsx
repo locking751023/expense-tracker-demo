@@ -48,8 +48,10 @@ const Record = () => {
 
   const calcRevenue: Number = RecordedProducts?.reduce(
     (total, recordedProduct) => {
-      const { amount, historyPrice, Product } = recordedProduct;
-      return Number(total + calSubTotal(amount, Product?.unit, historyPrice));
+      const { amount, sendBack, historyPrice, Product } = recordedProduct;
+      return Number(
+        total + calSubTotal(amount, sendBack, Product?.unit, historyPrice),
+      );
     },
     0,
   );

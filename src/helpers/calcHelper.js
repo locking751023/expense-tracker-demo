@@ -1,12 +1,27 @@
 export const unitSwitch = (count, unit) => {
-  const tk = Math.floor(count / 1);
-  const tg = Math.round((count % 1) * 10);
-  if (unit === '兩') {
-    return tk * 16 + tg;
+  const array = count?.toString().split('.') || 0;
+  const jin = Number(array[0]) || 0;
+  const teal = Number(array[1]) || 0;
+
+  switch (unit) {
+    case '兩':
+      return jin * 16 + teal;
+    case '斤':
+      return jin + teal / 16;
+    default:
+      return count;
   }
-  return Number(`${tk}.${tg}`);
 };
 
-export const calSubTotal = (prodCount, prodUnit, prodPrice) => {
-  return Math.round(prodPrice * unitSwitch(prodCount, prodUnit)) || 0;
+export const calSubTotal = (
+  prodAmount,
+  prodSendBack,
+  prodUnit,
+  prodPriceOrCost,
+) => {
+  return (
+    prodPriceOrCost *
+      (unitSwitch(prodAmount, prodUnit) - unitSwitch(prodSendBack, prodUnit)) ||
+    0
+  );
 };

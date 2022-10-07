@@ -12,8 +12,6 @@ import useStore from '../../store';
 import ProtectRoute from '../../containers/ProtectedRoute/ProtectedRoute';
 import SingPageProtected from '../../containers/SingPageProtected/SingPageProtected';
 
-// TODO 修改 calSubTotal 計算公式
-
 const App = () => {
   const { init, isAppInitializedComplete } = useStore((state) => {
     return {
