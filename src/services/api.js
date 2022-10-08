@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const JWT_TOKEN = 'JWT_TOKEN';
-const baseURL = process.env.API_BASE_URL;
+const baseURL = process.env.REACT_APP_API_URL;
 const apiHelper = axios.create({
   baseURL,
 });
