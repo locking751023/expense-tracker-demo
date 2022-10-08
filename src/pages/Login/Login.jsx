@@ -63,10 +63,16 @@ const Login = () => {
         >
           登入
         </button>
-        <button className="my-1 w-full rounded-md  bg-[#4267B2] p-2 text-white md:w-[30%]">
+        <button
+          className="my-1 w-full rounded-md  bg-[#4267B2] p-2 text-white md:w-[30%]"
+          disabled
+        >
           Facebook 登入
         </button>
-        <button className="my-1 w-full rounded-md  bg-[#06c755] p-2 text-white md:w-[30%]">
+        <button
+          className="my-1 w-full rounded-md  bg-[#06c755] p-2 text-white md:w-[30%]"
+          disabled
+        >
           Line 登入
         </button>
       </div>

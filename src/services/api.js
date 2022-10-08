@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const JWT_TOKEN = 'JWT_TOKEN';
-const baseURL = 'http://localhost:3000/api';
+const baseURL = process.env.API_BASE_URL;
 const apiHelper = axios.create({
   baseURL,
 });
