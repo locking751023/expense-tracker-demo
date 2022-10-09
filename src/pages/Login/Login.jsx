@@ -23,7 +23,7 @@ const Login = () => {
   return (
     <form
       onSubmit={handleSubmit(atSubmit)}
-      className="container m-auto flex h-2/3 max-w-lg flex-col rounded-xl border-8 shadow-xl backdrop-blur-lg md:h-[50%]"
+      className="container m-auto flex h-[55%] max-h-[425px] max-w-lg flex-col overflow-y-scroll rounded-xl border-8 shadow-xl backdrop-blur-lg md:h-[45%]"
     >
       <h2 className="w-full p-2 text-center">登入帳號</h2>
       <label className="flex h-[33%] flex-col justify-center px-2">
@@ -56,23 +56,17 @@ const Login = () => {
           <small className="text-danger">長度超過15</small>
         )}
       </label>
-      <div className="my-auto flex flex-col justify-evenly md:flex-row">
+      <div className="mt-3 flex flex-col justify-evenly px-2 md:flex-row md:px-0">
         <button
           type="submit"
           className="my-1 w-full rounded-md  bg-primary p-2  text-white md:w-[30%]"
         >
           登入
         </button>
-        <button
-          className="my-1 w-full rounded-md  bg-[#4267B2] p-2 text-white md:w-[30%]"
-          disabled
-        >
+        <button className="my-1 w-full rounded-md  bg-[#4267B2] p-2 text-white md:w-[30%]">
           Facebook 登入
         </button>
-        <button
-          className="my-1 w-full rounded-md  bg-[#06c755] p-2 text-white md:w-[30%]"
-          disabled
-        >
+        <button className="my-1 w-full rounded-md  bg-[#06c755] p-2 text-white md:w-[30%]">
           Line 登入
         </button>
       </div>

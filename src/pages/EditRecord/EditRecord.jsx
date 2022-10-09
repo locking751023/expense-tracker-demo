@@ -81,9 +81,10 @@ const EditRecord = () => {
   return (
     <IsLoading>
       <form onSubmit={handleSubmit(atSubmit)} className="h-full w-full p-3">
-        <header className="flex h-[10%] justify-between">
-          <div className="flex flex-col sm:flex-row">
-            <div className="mb-2 flex sm:m-2 sm:flex-col">
+        <header className="flex h-[13%] justify-between md:h-[9%]">
+          {/* date & location */}
+          <div className="flex flex-col overflow-y-scroll md:flex-row">
+            <div className="flex flex-col pb-1 sm:m-2 sm:flex-row">
               <label>
                 日期：
                 <input
@@ -96,7 +97,7 @@ const EditRecord = () => {
                 {errors.date?.message}
               </small>
             </div>
-            <div className="mb-2 flex sm:m-2 sm:flex-col">
+            <div className="flex flex-col pb-1 sm:m-2 sm:flex-row">
               <label>
                 地點：
                 <select
@@ -116,24 +117,28 @@ const EditRecord = () => {
               </small>
             </div>
           </div>
-          <div className="my-auto flex ">
-            <button type="submit" className="btn mx-2 bg-success text-white">
+          {/* buttons */}
+          <div className="flex h-full">
+            <button
+              type="submit"
+              className="btn my-auto mx-2 bg-success text-white"
+            >
               儲存
             </button>
             <Link
               to={`/record/${params}`}
-              className="btn mx-2 bg-light text-white"
+              className="btn my-auto mx-2 bg-light text-white"
             >
               取消
             </Link>
           </div>
         </header>
-        <div className="grid h-[8%] grid-cols-6 gap-1 border-b-2 border-gray-500">
+        <div className="grid h-[10%] grid-cols-6 gap-1 border-b-2 border-gray-500 md:h-[8%]">
           {NAVITEMS.map((item) => (
             <Item item={item} key={item} />
           ))}
         </div>
-        <div className="max-h-[83%] overflow-y-scroll shadow-md">
+        <div className="h-[78%] overflow-y-scroll shadow-md md:h-[83%]">
           {products?.map((product) => (
             <InputForm
               product={product}

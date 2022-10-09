@@ -41,6 +41,11 @@ const InputForm = (props) => {
     defaultValue: id,
   });
 
+  const step = () => {
+    if (unit === '斤' || unit === '兩') return 0.01;
+    return 1;
+  };
+
   React.useEffect(() => {
     setSubTotal(calSubTotal(amount?.value, sendBack?.value, unit, price));
     setValue(`product.${name}.subTotalValue`, subTotal);
@@ -55,7 +60,7 @@ const InputForm = (props) => {
         type="number"
         min={0.0}
         max={99.0}
-        step={0.1}
+        step={step()}
         className="rounded-md border-2 bg-slate-100"
         {...amount}
       />
@@ -63,7 +68,7 @@ const InputForm = (props) => {
         type="number"
         min={0.0}
         max={99.0}
-        step={0.1}
+        step={step()}
         className="rounded-md border-2 bg-slate-100"
         {...sendBack}
       />

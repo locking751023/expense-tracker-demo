@@ -27,7 +27,7 @@ const Register = () => {
   return (
     <form
       onSubmit={handleSubmit(atSubmit)}
-      className="container m-auto flex h-2/3 max-w-lg flex-col rounded-xl border-8 shadow-xl backdrop-blur-lg md:h-[70%]"
+      className="container m-auto flex max-h-[500px] max-w-lg flex-col overflow-y-scroll rounded-xl border-8 shadow-xl backdrop-blur-lg md:h-[55%]"
     >
       <h2 className="w-full p-2 text-center">註冊帳號</h2>
       <label className="flex h-[33%] flex-col justify-center px-2">
@@ -84,7 +84,7 @@ const Register = () => {
           <small className="text-danger">長度超過12</small>
         )}
       </label>
-      <div className="my-auto flex flex-col justify-evenly py-2 md:flex-row">
+      <div className="my-auto flex flex-col justify-evenly py-2 px-2 md:flex-row md:px-0">
         <input
           type="submit"
           className="my-1 w-full rounded-md  bg-primary p-2  text-white md:w-[30%]"

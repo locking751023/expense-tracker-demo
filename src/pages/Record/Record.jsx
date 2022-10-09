@@ -69,10 +69,10 @@ const Record = () => {
       <div className="h-full w-full px-2">
         <header className="flex h-[10%] justify-between">
           <div className="flex flex-col sm:flex-row">
-            <h2 className="m-2 sm:my-2">日期：{recordDate()}</h2>
-            <h2 className="m-2 sm:my-2">地點：{Location?.name}</h2>
+            <h2 className="py-1 md:m-2">日期：{recordDate()}</h2>
+            <h2 className="py-1 md:m-2">地點：{Location?.name}</h2>
           </div>
-          <div className="my-auto flex ">
+          <div className="my-auto flex">
             <Link
               to={`/record/${params}/edit`}
               className="btn mx-2 bg-primary text-white"
@@ -89,12 +89,12 @@ const Record = () => {
             </button>
           </div>
         </header>
-        <div className="grid h-[8%] grid-cols-6 gap-1 border-b-2 border-gray-500">
+        <div className="grid h-[12%] grid-cols-6 gap-1 border-b-2 border-gray-500 pt-2 md:h-[8%]">
           {NAVITEMS.map((item) => (
             <Item item={item} key={item} />
           ))}
         </div>
-        <div className="max-h-[74%] overflow-y-scroll shadow-md">
+        <div className="h-[70%] overflow-y-scroll shadow-md md:h-[74%]">
           {RecordedProducts?.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))}

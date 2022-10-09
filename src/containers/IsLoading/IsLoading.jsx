@@ -19,7 +19,7 @@ const IsLoading = (props) => {
         MySwal.showLoading();
       },
     });
-    return '';
+    return <div className="h-full w-full" />;
   }
   return children;
 };
