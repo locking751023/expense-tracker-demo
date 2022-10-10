@@ -49,7 +49,7 @@ const RecordCard: React.FC<RecordCardProps> = (props) => {
   return (
     <Link to={`/record/${id}`}>
       <div className="grid grid-cols-5 border-b-2">
-        <Item item={dayjs(date).format('MM/DD (dd)')} />
+        <Item item={dayjs(date).format('MM / DD (dd)')} />
         <Item item={Location.name} />
         <Item item={ShippingSum} subItem={StockSum} />
         <Item item={salesSum} subItem={commission} />
