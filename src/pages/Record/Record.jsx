@@ -72,7 +72,7 @@ const Record = () => {
         <header className="flex h-[14%] justify-between md:h-[9%]">
           <div className="flex flex-col sm:flex-row">
             <h2 className="py-1 md:m-2">日期：{recordDate}</h2>
-            <h2 className="py-1 md:m-2">地點：{Location.name}</h2>
+            <h2 className="py-1 md:m-2">地點：{Location?.name}</h2>
           </div>
           <div className="flex h-full">
             <Link

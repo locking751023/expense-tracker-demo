@@ -32,12 +32,14 @@ const RecordCard: React.FC<RecordCardProps> = (props) => {
       }, 0);
     });
     setStockSum(() => {
-      return RecordedProducts.reduce((total, recordedProduct) => {
+      const stockSun = RecordedProducts.reduce((total, recordedProduct) => {
         const { historyPrice, sendBack, Product } = recordedProduct;
         return Number(
           total + calSubTotal(historyPrice, sendBack, Product?.unit),
         );
       }, 0);
+      if (stockSun === 0) return '0';
+      return stockSun;
     });
     setSalesSum(ShippingSum - StockSum);
     setCommission(Math.round(salesSum * 0.16));
