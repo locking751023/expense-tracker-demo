@@ -31,12 +31,12 @@ const Records = () => {
             新增記帳
           </Link>
         </div>
-        <div className="grid h-[8%] grid-cols-5 gap-1 border-b-2 border-gray-500">
+        <div className="grid h-[10%] grid-cols-5 gap-1 border-b-2 border-gray-500">
           {NAVITEMS.map((item) => (
-            <Item item={item} key={item} />
+            <Item item={item.item} subItem={item.subItem} key={item.item} />
           ))}
         </div>
-        <div className="h-[83%] overflow-y-scroll shadow-md">
+        <div className="h-[81%] overflow-y-scroll shadow-md">
           {records.map((record) => (
             <RecordCard record={record} key={record.id} />
           ))}

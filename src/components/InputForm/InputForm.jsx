@@ -7,6 +7,7 @@ const InputForm = (props) => {
   const { control, setValue, product, recordedProducts } = props;
   const { id, name, price, unit } = product;
   const [subTotal, setSubTotal] = React.useState();
+  const [step, setStep] = React.useState();
   const defValues = recordedProducts?.find((item) => {
     if (item.productId === id) {
       return {
@@ -41,14 +42,18 @@ const InputForm = (props) => {
     defaultValue: id,
   });
 
-  const step = () => {
-    if (unit === '斤' || unit === '兩') return 0.01;
-    return 1;
-  };
-
   React.useEffect(() => {
-    setSubTotal(calSubTotal(amount?.value, sendBack?.value, unit, price));
+    setSubTotal(() => {
+      return (
+        calSubTotal(price, amount.value, unit) -
+        calSubTotal(price, sendBack.value, unit)
+      );
+    });
     setValue(`product.${name}.subTotalValue`, subTotal);
+    setStep(() => {
+      if (unit === '斤' || unit === '兩') return 0.01;
+      return 1;
+    });
   }, [amount, sendBack, unit, price, setValue, name, subTotal]);
 
   return (
@@ -60,7 +65,7 @@ const InputForm = (props) => {
         type="number"
         min={0.0}
         max={99.0}
-        step={step()}
+        step={step}
         className="rounded-md border-2 bg-slate-100"
         {...amount}
       />
@@ -68,7 +73,7 @@ const InputForm = (props) => {
         type="number"
         min={0.0}
         max={99.0}
-        step={step()}
+        step={step}
         className="rounded-md border-2 bg-slate-100"
         {...sendBack}
       />

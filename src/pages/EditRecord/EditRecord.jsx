@@ -81,7 +81,7 @@ const EditRecord = () => {
   return (
     <IsLoading>
       <form onSubmit={handleSubmit(atSubmit)} className="h-full w-full p-3">
-        <header className="flex h-[13%] justify-between md:h-[9%]">
+        <header className="flex h-[14%] justify-between md:h-[9%]">
           {/* date & location */}
           <div className="flex flex-col overflow-y-scroll md:flex-row">
             <div className="flex flex-col pb-1 sm:m-2 sm:flex-row">

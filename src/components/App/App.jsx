@@ -24,7 +24,7 @@ const App = () => {
   }, []); // eslint-disable-line
   if (!isAppInitializedComplete) {
     return (
-      <div className="flex h-full w-full justify-center">
+      <div className="flex h-screen w-full justify-center">
         <div className="my-auto">載入中...</div>
       </div>
     );

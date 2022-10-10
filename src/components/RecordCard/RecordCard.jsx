@@ -18,32 +18,40 @@ type RecordCardProps = {
 
 const RecordCard: React.FC<RecordCardProps> = (props) => {
   const { id, RecordedProducts, date, Location } = props.record;
+  const [ShippingSum, setShippingSum] = React.useState(0);
+  const [StockSum, setStockSum] = React.useState(0);
+  const [salesSum, setSalesSum] = React.useState(0);
+  const [commission, setCommission] = React.useState(0);
+  const [sumOfBusiness, setSumOfBusiness] = React.useState(0);
 
-  const calcCost: Number = RecordedProducts.reduce((total, recordedProduct) => {
-    const { historyCost, amount, sendBack, Product } = recordedProduct;
-    return Number(
-      total + calSubTotal(amount, sendBack, Product?.unit, historyCost),
-    );
-  }, 0);
-
-  const calcRevenue: Number = RecordedProducts.reduce(
-    (total, recordedProduct) => {
-      const { historyPrice, amount, sendBack, Product } = recordedProduct;
-      return Number(
-        total + calSubTotal(amount, sendBack, Product?.unit, historyPrice),
-      );
-    },
-    0,
-  );
+  React.useEffect(() => {
+    setShippingSum(() => {
+      return RecordedProducts.reduce((total, recordedProduct) => {
+        const { historyPrice, amount, Product } = recordedProduct;
+        return Number(total + calSubTotal(historyPrice, amount, Product?.unit));
+      }, 0);
+    });
+    setStockSum(() => {
+      return RecordedProducts.reduce((total, recordedProduct) => {
+        const { historyPrice, sendBack, Product } = recordedProduct;
+        return Number(
+          total + calSubTotal(historyPrice, sendBack, Product?.unit),
+        );
+      }, 0);
+    });
+    setSalesSum(ShippingSum - StockSum);
+    setCommission(Math.round(salesSum * 0.16));
+    setSumOfBusiness(salesSum - commission);
+  }, [RecordedProducts, ShippingSum, StockSum, salesSum, commission]);
 
   return (
     <Link to={`/record/${id}`}>
       <div className="grid grid-cols-5 border-b-2">
         <Item item={dayjs(date).format('MM/DD (dd)')} />
         <Item item={Location.name} />
-        <Item item={calcCost} />
-        <Item item={calcRevenue} />
-        <Item item={calcRevenue - calcCost || 0} />
+        <Item item={ShippingSum} subItem={StockSum} />
+        <Item item={salesSum} subItem={commission} />
+        <Item item={sumOfBusiness} />
       </div>
     </Link>
   );

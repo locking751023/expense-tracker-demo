@@ -13,15 +13,6 @@ export const unitSwitch = (count, unit) => {
   }
 };
 
-export const calSubTotal = (
-  prodAmount,
-  prodSendBack,
-  prodUnit,
-  prodPriceOrCost,
-) => {
-  return (
-    prodPriceOrCost *
-      (unitSwitch(prodAmount, prodUnit) - unitSwitch(prodSendBack, prodUnit)) ||
-    0
-  );
+export const calSubTotal = (prodPrice, prodAmountOrSendBack, prodUnit) => {
+  return prodPrice * unitSwitch(prodAmountOrSendBack, prodUnit) || 0;
 };

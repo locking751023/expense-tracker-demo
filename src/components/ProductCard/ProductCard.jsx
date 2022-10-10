@@ -13,6 +13,16 @@ type ProductCardProps = {
 
 const ProductCard: React.FC<ProductCardProps> = (props) => {
   const { historyPrice, Product, amount, sendBack } = props.product;
+  const [subTotal, setSubTotal] = React.useState();
+
+  React.useEffect(() => {
+    setSubTotal(() => {
+      return (
+        calSubTotal(historyPrice, amount, Product.unit) -
+        calSubTotal(historyPrice, sendBack, Product.unit)
+      );
+    });
+  }, [historyPrice, amount, sendBack, Product.unit]);
 
   return (
     <div className="grid grid-cols-6 gap-1 border-b-2">
@@ -21,7 +31,7 @@ const ProductCard: React.FC<ProductCardProps> = (props) => {
       <Item item={Product.unit} />
       <Item item={amount} />
       <Item item={sendBack} />
-      <Item item={calSubTotal(amount, sendBack, Product?.unit, historyPrice)} />
+      <Item item={subTotal} />
     </div>
   );
 };

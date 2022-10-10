@@ -14,7 +14,7 @@ const IsLoading = (props) => {
   if (loading) {
     MySwal.fire({
       title: '載入中',
-      timer: 300,
+      timer: 500,
       didOpen: () => {
         MySwal.showLoading();
       },
