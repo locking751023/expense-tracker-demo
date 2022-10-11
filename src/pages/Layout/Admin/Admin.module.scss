@@ -1,6 +1,11 @@
 .nav {
-  @apply h-[12%] flex p-2 items-center;
+  height: 12%;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
   :global(.active) {
-    @apply shadow-xl rounded-xl border-2 border-[#4673ef];
+    border: 2px solid #4673ef;
+    border-radius: 0.75rem;
+    box-shadow: 10px 10px 25px -5px rgb(0 0 0 / 0.1), 8px 8px 10px -6px rgb(0 0 0 / 0.1);
   }
 };
