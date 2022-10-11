@@ -1,0 +1,6 @@
+.nav {
+  @apply h-[12%] flex p-2 items-center;
+  :global(.active) {
+    @apply shadow-xl rounded-xl border-2 border-[#4673ef];
+  }
+};

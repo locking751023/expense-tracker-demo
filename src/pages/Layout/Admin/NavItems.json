@@ -1,0 +1,6 @@
+[
+  { "name": "使用者清單", "url": "/admin/user" },
+  { "name": "產品清單", "url": "/admin/productList" },
+  { "name": "地點清單", "url": "/admin/locationList" },
+  { "name": "所有記錄", "url": "/admin/allRecords" }
+]

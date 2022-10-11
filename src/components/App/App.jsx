@@ -8,6 +8,8 @@ import Records from '../../pages/Records';
 import Record from '../../pages/Record';
 import NewRecord from '../../pages/NewRecord';
 import EditRecord from '../../pages/EditRecord';
+import Admin from '../../pages/Layout/Admin';
+import UserLists from '../../pages/UserLists/UserLists';
 import useStore from '../../store';
 import ProtectRoute from '../../containers/ProtectedRoute/ProtectedRoute';
 import SingPageProtected from '../../containers/SingPageProtected/SingPageProtected';
@@ -59,20 +61,36 @@ const App = () => {
             <Route path=":rid/edit" element={<EditRecord />} />
           </Route>
           <Route
-            path="/report"
+            path="profile"
             element={
               <div className="flex h-full w-full justify-center">
                 <p className="my-auto text-5xl">施工中...</p>
               </div>
             }
+          >
+            <Route
+              path="setting"
+              element={
+                <div className="flex h-full w-full justify-center">
+                  <p className="my-auto text-5xl">施工中...</p>
+                </div>
+              }
+            />
+          </Route>
+        </Route>
+        <Route path="admin" element={<Admin />}>
+          <Route path="user" element={<UserLists />} />
+          <Route
+            path="productList"
+            element={<p className=" p-3 text-3xl">productList</p>}
           />
           <Route
-            path="/setting"
-            element={
-              <div className="flex h-full w-full justify-center">
-                <p className="my-auto text-5xl">施工中...</p>
-              </div>
-            }
+            path="locationList"
+            element={<p className=" p-3 text-3xl">locationList</p>}
+          />
+          <Route
+            path="allRecords"
+            element={<p className=" p-3 text-3xl">allRecords</p>}
           />
         </Route>
         <Route

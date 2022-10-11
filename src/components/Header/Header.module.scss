@@ -1,5 +1,11 @@
 .root {
   height: 100%;
+  .body {
+    @apply flex h-full flex-col justify-between rounded-t-md bg-gradient-to-tl from-[#e2f2fa] to-[#518ef0] p-5 shadow-lg sm:flex-row;
+    &[data-active="true"] {
+      @apply bg-gradient-to-tl from-[#f6d365] to-[#f1704c];
+    }
+  }
   :global(.active) {
     background-color: white;
     border: 1px solid #0ea5e9;

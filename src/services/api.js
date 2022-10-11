@@ -138,3 +138,25 @@ export const fetchPutRecord = (rid, data) => {
       return err;
     });
 };
+
+export const fetchAllUsers = () => {
+  return apiHelper
+    .get('/admin/users')
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+export const fetchDeleteUser = (uid) => {
+  return apiHelper
+    .delete(`/admin/user/${uid}/delete`)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};

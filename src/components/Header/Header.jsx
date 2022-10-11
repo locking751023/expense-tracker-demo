@@ -5,23 +5,28 @@ import style from './Header.module.scss';
 
 const Header = (props) => {
   const { user, onLogout } = props;
-
   return (
     <div className={style.root}>
-      <div className="flex h-full flex-col justify-between rounded-t-md bg-sky-300 p-5 shadow-lg sm:flex-row">
+      <div className={style.body} data-active={user?.isAdmin}>
         <h1 className="mb-2 sm:mb-0 sm:flex sm:flex-col sm:justify-center">
-          {user.name} 記帳簿
+          {user?.isAdmin ? `${user?.name} 管理員` : `${user?.name} 記帳簿`}
         </h1>
         <nav className="mt-auto flex justify-end">
-          {NavItem.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.url}
-              className="rounded-t-lg border-b border-sky-500 px-4 py-2 text-blue-500 hover:border"
-            >
-              {item.name}
-            </NavLink>
-          ))}
+          {NavItem.map((item) => {
+            if (user?.isAdmin || (!user?.isAdmin && !item.isAdmin)) {
+              return (
+                <NavLink
+                  key={item.name}
+                  to={item.url}
+                  className="rounded-t-lg border-b border-sky-500 px-4 py-2 text-blue-500 hover:border data-active:border-black data-active:text-black"
+                  data-active={user?.isAdmin}
+                >
+                  {item.name}
+                </NavLink>
+              );
+            }
+            return '';
+          })}
           <button
             className="btn ml-3 bg-success text-white"
             onClick={() => onLogout()}
