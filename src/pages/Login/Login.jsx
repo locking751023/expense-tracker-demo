@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
 import shallow from 'zustand/shallow';
 import useStore from '../../store';
 
@@ -30,12 +31,20 @@ const Login = () => {
         帳號
         <input
           className="mt-2 rounded-sm p-2 leading-5"
-          type="email"
+          type="text"
           id="userId"
-          placeholder="請輸入 email"
-          {...register('email', { required: true })}
+          placeholder="請輸入 email (ex: example@gmail.com)"
+          {...register('email', {
+            required: '此欄位為必填',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'email 格式錯誤',
+            },
+          })}
         />
-        {errors.email && <small className="text-danger">此欄位為必填</small>}
+        <small className="text-danger">
+          <ErrorMessage errors={errors} name="email" />
+        </small>
       </label>
       <label className="flex h-[28%] flex-col justify-center px-2">
         密碼
@@ -43,18 +52,16 @@ const Login = () => {
           className="mt-2 rounded-sm p-2 leading-5"
           type="text"
           id="userPassword"
-          placeholder="請輸入密碼"
+          placeholder="請輸入密碼(6~12字)"
           {...register('password', {
-            required: true,
-            maxLength: 12,
+            required: '此欄位為必填',
+            maxLength: { value: 12, message: '長度超過12' },
+            minLength: { value: 6, message: '長度小於6' },
           })}
         />
-        {errors.password?.type === 'required' && (
-          <small className="text-danger">此欄位為必填</small>
-        )}
-        {errors.password?.type === 'maxLength' && (
-          <small className="text-danger">長度超過15</small>
-        )}
+        <small className="text-danger">
+          <ErrorMessage errors={errors} name="password" />
+        </small>
       </label>
       <div className="mt-3 flex flex-col justify-evenly px-2 md:flex-row md:px-0">
         <button

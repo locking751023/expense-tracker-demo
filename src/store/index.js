@@ -146,6 +146,7 @@ const useStore = create((set) => {
         .finally(() => set({ loading: false }));
     },
     postNewRecord(newRecord) {
+      set({ loading: true });
       fetchPostNewRecord(newRecord)
         .then((res) => {
           const { data, response } = res;
@@ -159,7 +160,7 @@ const useStore = create((set) => {
         })
         .catch((err) => console.log('postNewRecord error:', err))
         .finally(() => {
-          set({ postRecordSuccess: false });
+          set({ postRecordSuccess: false, loading: true });
         });
     },
     deleteRecord(rid) {
@@ -172,6 +173,7 @@ const useStore = create((set) => {
         });
     },
     updateRecord(rid, newRecord) {
+      set({ loading: true });
       fetchPutRecord(rid, newRecord)
         .then((res) => {
           if (res.data.status === 'success') {
@@ -181,7 +183,7 @@ const useStore = create((set) => {
           return toastHelper('資料修改失敗', 'error');
         })
         .catch((err) => console.log('updateRecord error:', err))
-        .finally(() => set({ updateRecordSuccess: false }));
+        .finally(() => set({ updateRecordSuccess: false, loading: false }));
     },
     getAllUsers() {
       set({ loading: true });

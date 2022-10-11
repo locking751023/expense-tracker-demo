@@ -32,14 +32,18 @@ const UserLists = () => {
             className="mb-3 flex justify-between rounded-xl bg-slate-200 p-2 shadow-xl"
             key={user.id}
           >
-            <div>
-              <div>
-                <div>使用者名稱：{user.name}</div>
-                <div>E-mail：{user.email}</div>
+            <div className="w-[80%] sm:flex">
+              <div className="sm:w-1/2">
+                <div className="pb-1 pl-1">使用者名稱：{user.name}</div>
+                <div className="pb-1 pl-1">E-mail：{user.email}</div>
               </div>
-              <div>
-                <div>使用者權限：{user.isAdmin ? '管理員' : '一般使用者'}</div>
-                <div>累積記錄：{user.Records.length} 筆</div>
+              <div className="sm:w-1/2">
+                <div className="pb-1 pl-1">
+                  使用者權限：{user.isAdmin ? '管理員' : '一般使用者'}
+                </div>
+                <div className="pb-1 pl-1">
+                  累積記錄：{user.Records.length} 筆
+                </div>
               </div>
             </div>
             <button

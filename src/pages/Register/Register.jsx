@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import shallow from 'zustand/shallow';
+import { ErrorMessage } from '@hookform/error-message';
 import useStore from '../../store';
 
 const Register = () => {
@@ -15,6 +16,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm();
 
@@ -24,6 +26,7 @@ const Register = () => {
   if (registerSuccess) {
     return <Navigate to="/user/login" />;
   }
+
   return (
     <form
       onSubmit={handleSubmit(atSubmit)}
@@ -35,10 +38,14 @@ const Register = () => {
         <input
           className="mt-2 rounded-sm p-2 leading-5"
           type="text"
-          placeholder="請輸入名稱"
-          {...register('name', { maxLength: 7 })}
+          placeholder="名稱字數小於12(王小明)"
+          {...register('name', {
+            maxLength: { value: 12, message: '長度超過12' },
+          })}
         />
-        {errors.name && <small className="text-danger">長度超過7</small>}
+        <small className="text-danger">
+          <ErrorMessage errors={errors} name="name" />
+        </small>
       </label>
 
       <label className="flex h-[33%] flex-col justify-center px-2">
@@ -46,12 +53,18 @@ const Register = () => {
         <input
           className="mt-2 rounded-sm p-2 leading-5"
           type="text"
-          placeholder="請輸入 email"
-          {...register('email', { required: true })}
+          placeholder="請輸入 email (ex: example@gmail.com)"
+          {...register('email', {
+            required: '此欄位為必填',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'email 格式錯誤',
+            },
+          })}
         />
-        {errors.email?.type === 'required' && (
-          <small className="text-danger">此欄位為必填</small>
-        )}
+        <small className="text-danger">
+          <ErrorMessage errors={errors} name="email" />
+        </small>
       </label>
 
       <label className="flex h-[33%] flex-col justify-center px-2">
@@ -59,15 +72,16 @@ const Register = () => {
         <input
           className="mt-2 rounded-sm p-2 leading-5"
           type="text"
-          placeholder="請輸入密碼"
-          {...register('password', { required: true, maxLength: 12 })}
+          placeholder="請輸入密碼(6~12字)"
+          {...register('password', {
+            required: '此欄位為必填',
+            maxLength: { value: 12, message: '長度超過12' },
+            minLength: { value: 6, message: '長度小於6' },
+          })}
         />
-        {errors.password?.type === 'required' && (
-          <small className="text-danger">此欄位為必填</small>
-        )}
-        {errors.password?.type === 'maxLength' && (
-          <small className="text-danger">長度超過12</small>
-        )}
+        <small className="text-danger">
+          <ErrorMessage errors={errors} name="password" />
+        </small>
       </label>
       <label className="flex h-[33%] flex-col justify-center px-2">
         確認密碼
@@ -75,14 +89,19 @@ const Register = () => {
           className="mt-2 rounded-sm p-2 leading-5"
           type="text"
           placeholder="請再次輸入密碼"
-          {...register('checkPassword', { required: true, maxLength: 12 })}
+          {...register('checkPassword', {
+            required: '此欄位為必填',
+            maxLength: { value: 12, message: '長度超過12' },
+            minLength: { value: 6, message: '長度小於6' },
+            validate: {
+              isMatch: (value) =>
+                value === getValues('password') || '密碼不相同',
+            },
+          })}
         />
-        {errors.checkPassword?.type === 'required' && (
-          <small className="text-danger">此欄位為必填</small>
-        )}
-        {errors.checkPassword?.type === 'maxLength' && (
-          <small className="text-danger">長度超過12</small>
-        )}
+        <small className="text-danger">
+          <ErrorMessage errors={errors} name="checkPassword" />
+        </small>
       </label>
       <div className="my-auto flex flex-col justify-evenly py-2 px-2 md:flex-row md:px-0">
         <input

@@ -9,6 +9,7 @@ import IsLoading from '../../containers/IsLoading';
 
 const NewRecord = () => {
   const {
+    loading,
     products,
     locations,
     getProducts,
@@ -17,6 +18,7 @@ const NewRecord = () => {
     postRecordSuccess,
   } = useStore((state) => {
     return {
+      loading: state.loading,
       products: state.products,
       locations: state.locations,
       getProducts: state.getProducts,
@@ -36,6 +38,7 @@ const NewRecord = () => {
   } = formMethod;
 
   const atSubmit = (submitData) => {
+    if (loading) return;
     const newProducts = Object.values(submitData.product).map((data) => {
       const product = products.find((item) => {
         return item.id === data.id;
@@ -64,7 +67,6 @@ const NewRecord = () => {
   if (postRecordSuccess) {
     return <Navigate to="/" />;
   }
-
   return (
     <IsLoading>
       <form onSubmit={handleSubmit(atSubmit)} className="h-full w-full p-3">

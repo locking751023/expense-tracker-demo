@@ -11,6 +11,7 @@ import IsLoading from '../../containers/IsLoading';
 const EditRecord = () => {
   const params = useParams().rid;
   const {
+    loading,
     record,
     products,
     locations,
@@ -20,6 +21,7 @@ const EditRecord = () => {
     updateRecordSuccess,
   } = useStore((state) => {
     return {
+      loading: state.loading,
       record: state.record,
       products: state.products,
       locations: state.locations,
@@ -47,6 +49,7 @@ const EditRecord = () => {
   } = formMethod;
 
   const atSubmit = (submitData) => {
+    if (loading) return;
     const newProducts = Object.values(submitData.product).map((data) => {
       const recordedProduct = record.RecordedProducts.find((item) => {
         return item.productId === data.id;

@@ -79,6 +79,7 @@ const App = () => {
           </Route>
         </Route>
         <Route path="admin" element={<Admin />}>
+          <Route index element={<UserLists />} />
           <Route path="user" element={<UserLists />} />
           <Route
             path="productList"
