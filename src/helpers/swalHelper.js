@@ -22,3 +22,15 @@ export const toastHelper = (message, status, toastOpt) => {
     ...toastOpt,
   });
 };
+
+export const deleteConfirm = () => {
+  return MySwal.fire({
+    title: '確定要刪除這筆記錄?',
+    text: '刪除後無法復原!!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: '刪除!',
+  });
+};

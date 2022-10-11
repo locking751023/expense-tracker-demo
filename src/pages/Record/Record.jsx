@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import shallow from 'zustand/shallow';
-import Swal from 'sweetalert2';
 import Item from '../../components/Item';
 import ProductCard from '../../components/ProductCard';
 import NAVITEMS from '../../store/NavItems.json';
@@ -12,34 +11,22 @@ import IsLoading from '../../containers/IsLoading';
 
 const Record = () => {
   const params = useParams().rid;
-  const [deleteRecordSuccess, setDeleteRecordSuccess] = React.useState(false);
   const [recordDate, setRecordDate] = React.useState();
-  const { record, getRecord, deleteRecord } = useStore((state) => {
-    return {
-      record: state.record,
-      getRecord: state.getRecord,
-      deleteRecord: state.deleteRecord,
-    };
-  }, shallow);
+  const { record, getRecord, deleteRecord, deleteRecordSuccess } = useStore(
+    (state) => {
+      return {
+        record: state.record,
+        getRecord: state.getRecord,
+        deleteRecord: state.deleteRecord,
+        deleteRecordSuccess: state.deleteRecordSuccess,
+      };
+    },
+    shallow,
+  );
   const { RecordedProducts, date, Location } = record;
 
-  const atDeleteRecord = async () => {
-    const result = await Swal.fire({
-      title: '確定要刪除這筆記錄?',
-      text: '刪除後無法復原!!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '刪除!',
-    });
-    if (result.isConfirmed) {
-      const res = await deleteRecord(params);
-      if (res.status === 'success') {
-        Swal.fire('記錄已成功刪除');
-        setDeleteRecordSuccess(true);
-      }
-    }
+  const atDeleteRecord = () => {
+    deleteRecord(params);
   };
 
   const calcSalesSum: Number = RecordedProducts?.reduce(

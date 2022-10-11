@@ -10,6 +10,7 @@ import NewRecord from '../../pages/NewRecord';
 import EditRecord from '../../pages/EditRecord';
 import Admin from '../../pages/Layout/Admin';
 import UserLists from '../../pages/UserLists/UserLists';
+import AllRecords from '../../pages/AllRecords/AllRecords';
 import useStore from '../../store';
 import ProtectRoute from '../../containers/ProtectedRoute/ProtectedRoute';
 import SingPageProtected from '../../containers/SingPageProtected/SingPageProtected';
@@ -89,10 +90,7 @@ const App = () => {
             path="locationList"
             element={<p className=" p-3 text-3xl">locationList</p>}
           />
-          <Route
-            path="allRecords"
-            element={<p className=" p-3 text-3xl">allRecords</p>}
-          />
+          <Route path="allRecords" element={<AllRecords />} />
         </Route>
         <Route
           path="*"

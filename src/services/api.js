@@ -160,3 +160,14 @@ export const fetchDeleteUser = (uid) => {
       return err;
     });
 };
+
+export const fetchGetAllRecords = () => {
+  return apiHelper
+    .get('/admin/records')
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};

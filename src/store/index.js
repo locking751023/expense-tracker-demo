@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { toastHelper, MySwal } from '../helpers/swalHelper';
+import { toastHelper, deleteConfirm, MySwal } from '../helpers/swalHelper';
 import {
   getJWTToken,
   verifyToken,
@@ -15,6 +15,7 @@ import {
   fetchPutRecord,
   fetchAllUsers,
   fetchDeleteUser,
+  fetchGetAllRecords,
 } from '../services/api';
 
 const initialState = {
@@ -164,13 +165,34 @@ const useStore = create((set) => {
         });
     },
     deleteRecord(rid) {
-      return fetchDeleteRecord(rid)
-        .then((res) => {
-          return res;
-        })
-        .catch((err) => {
-          return err;
-        });
+      set({ deleteRecordSuccess: false });
+      return deleteConfirm().then((result) => {
+        if (result.isConfirmed) {
+          return fetchDeleteRecord(rid)
+            .then((res) => {
+              if (res.status === 'success') {
+                MySwal.fire('記錄已成功刪除');
+                set({ deleteRecordSuccess: true });
+                return res;
+              }
+              console.log('fetchDeleteRecord error:', res);
+              MySwal.fire({
+                title: res.response?.data.message || '發生錯誤',
+                icon: 'error',
+              });
+              return res;
+            })
+            .catch((err) => {
+              console.log('deleteRecord error:', err);
+              return err;
+            })
+            .finally(() => {
+              set({ deleteRecordSuccess: false });
+            });
+        }
+        toastHelper('取消刪除', 'info');
+        return 'canceled';
+      });
     },
     updateRecord(rid, newRecord) {
       set({ loading: true });
@@ -195,15 +217,7 @@ const useStore = create((set) => {
         .finally(() => set({ loading: false }));
     },
     deleteUser(uid) {
-      return MySwal.fire({
-        title: '確定要刪除這筆記錄?',
-        text: '刪除後無法復原!!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '刪除!',
-      }).then((result) => {
+      return deleteConfirm().then((result) => {
         if (result.isConfirmed) {
           return fetchDeleteUser(uid)
             .then((res) => {
@@ -211,21 +225,30 @@ const useStore = create((set) => {
                 MySwal.fire('記錄已成功刪除');
                 return res;
               }
-              console.log('fetchDeleteUser success:', res);
+              console.log('fetchDeleteUser error:', res);
               MySwal.fire({
-                tittle: res.response?.data.message || '發生錯誤',
+                title: res.response?.data.message || '發生錯誤',
                 icon: 'error',
               });
               return res;
             })
             .catch((err) => {
-              console.log('fetchDeleteUser error:', err);
+              console.log('deleteUser error:', err);
               return err;
             });
         }
         toastHelper('取消刪除', 'info');
         return 'canceled';
       });
+    },
+    getAllRecords() {
+      set({ loading: true });
+      fetchGetAllRecords()
+        .then((res) => {
+          set({ records: res.data?.records, loading: false });
+        })
+        .catch((err) => console.log('getAllRecords error:', err))
+        .finally(() => set({ loading: false }));
     },
   };
 });

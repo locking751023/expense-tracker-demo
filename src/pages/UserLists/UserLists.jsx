@@ -1,5 +1,6 @@
 import React from 'react';
 import shallow from 'zustand/shallow';
+import IsLoading from '../../containers/IsLoading';
 import useStore from '../../store';
 
 const UserLists = () => {
@@ -11,10 +12,10 @@ const UserLists = () => {
     };
   }, shallow);
 
-  const atDeleteUser = async (uid) => {
+  const atDeleteUser = (uid) => {
     deleteUser(uid)
       .then((res) => {
-        if (res.data?.status) return getAllUsers();
+        if (res.data?.status === 'success') return getAllUsers();
         return console.log('atDeleteUser res:', res);
       })
       .catch((err) => console.log('atDeletedUser error:', err));
@@ -25,39 +26,41 @@ const UserLists = () => {
   }, [getAllUsers]);
 
   return (
-    <div className="h-full overflow-y-scroll p-2">
-      {users?.userRemovePassword?.map((user) => {
-        return (
-          <div
-            className="mb-3 flex justify-between rounded-xl bg-slate-200 p-2 shadow-xl"
-            key={user.id}
-          >
-            <div className="w-[80%] sm:flex">
-              <div className="sm:w-1/2">
-                <div className="pb-1 pl-1">使用者名稱：{user.name}</div>
-                <div className="pb-1 pl-1">E-mail：{user.email}</div>
-              </div>
-              <div className="sm:w-1/2">
-                <div className="pb-1 pl-1">
-                  使用者權限：{user.isAdmin ? '管理員' : '一般使用者'}
-                </div>
-                <div className="pb-1 pl-1">
-                  累積記錄：{user.Records.length} 筆
-                </div>
-              </div>
-            </div>
-            <button
-              onClick={() => {
-                atDeleteUser(user.id);
-              }}
-              className="btn my-auto bg-danger text-white shadow-xl"
+    <IsLoading>
+      <div className="h-full overflow-y-scroll p-2">
+        {users?.userRemovePassword?.map((user) => {
+          return (
+            <div
+              className="mb-3 flex justify-between rounded-xl bg-slate-200 p-2 shadow-xl"
+              key={user.id}
             >
-              刪除
-            </button>
-          </div>
-        );
-      })}
-    </div>
+              <div className="w-[80%] sm:flex">
+                <div className="sm:w-1/2">
+                  <div className="pb-1 pl-1">使用者名稱：{user.name}</div>
+                  <div className="pb-1 pl-1">E-mail：{user.email}</div>
+                </div>
+                <div className="sm:w-1/2">
+                  <div className="pb-1 pl-1">
+                    使用者權限：{user.isAdmin ? '管理員' : '一般使用者'}
+                  </div>
+                  <div className="pb-1 pl-1">
+                    累積記錄：{user.Records.length} 筆
+                  </div>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  atDeleteUser(user.id);
+                }}
+                className="btn my-auto bg-danger text-white shadow-xl"
+              >
+                刪除
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    </IsLoading>
   );
 };
 
