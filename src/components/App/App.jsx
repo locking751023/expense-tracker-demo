@@ -15,6 +15,7 @@ import LocationLists from '../../pages/LocationLists/LocationLists';
 import useStore from '../../store';
 import ProtectRoute from '../../containers/ProtectedRoute/ProtectedRoute';
 import SingPageProtected from '../../containers/SingPageProtected/SingPageProtected';
+import { MySwal } from '../../helpers/swalHelper';
 
 const App = () => {
   const { init, isAppInitializedComplete } = useStore((state) => {
@@ -26,12 +27,16 @@ const App = () => {
   useEffect(() => {
     init();
   }, []); // eslint-disable-line
+
   if (!isAppInitializedComplete) {
-    return (
-      <div className="flex h-screen w-full justify-center">
-        <div className="my-auto">載入中...</div>
-      </div>
-    );
+    MySwal.fire({
+      title: '應用程式初始化中...',
+      timer: 500,
+      didOpen: () => {
+        MySwal.showLoading();
+      },
+    });
+    return <div className="flex h-screen w-full justify-center" />;
   }
 
   return (
@@ -80,7 +85,14 @@ const App = () => {
             />
           </Route>
         </Route>
-        <Route path="admin" element={<Admin />}>
+        <Route
+          path="admin"
+          element={
+            <ProtectRoute>
+              <Admin />
+            </ProtectRoute>
+          }
+        >
           <Route index element={<UserLists />} />
           <Route path="user" element={<UserLists />} />
           <Route

@@ -1,9 +1,12 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useMatch, useNavigate } from 'react-router-dom';
 import shallow from 'zustand/shallow';
 import useStore from '../../store';
+import { toastHelper } from '../../helpers/swalHelper';
 
 const ProtectedRoute = (props) => {
+  const isMatch = useMatch('/admin/*');
+  const navigate = useNavigate();
   const { children } = props;
 
   const { user } = useStore((state) => {
@@ -13,6 +16,7 @@ const ProtectedRoute = (props) => {
   }, shallow);
 
   if (!user) {
+    toastHelper('請先登入帳號!', 'warning', { position: 'top' });
     return (
       <Navigate
         to={`/user/login?redirect_url=${encodeURIComponent(
@@ -22,6 +26,10 @@ const ProtectedRoute = (props) => {
       />
     );
   }
+  if (!user.isAdmin && isMatch) {
+    return navigate(-1);
+  }
+
   return children;
 };
 
