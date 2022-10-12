@@ -37,7 +37,7 @@ const Records = () => {
           ))}
         </div>
         <div className="h-[81%] overflow-y-scroll shadow-md">
-          {records.map((record) => (
+          {records?.map((record) => (
             <RecordCard record={record} key={record.id} />
           ))}
         </div>

@@ -18,7 +18,7 @@ const EditRecord = () => {
     getProducts,
     getLocations,
     updateRecord,
-    updateRecordSuccess,
+    updateSuccess,
   } = useStore((state) => {
     return {
       loading: state.loading,
@@ -28,7 +28,7 @@ const EditRecord = () => {
       getProducts: state.getProducts,
       getLocations: state.getLocations,
       updateRecord: state.updateRecord,
-      updateRecordSuccess: state.updateRecordSuccess,
+      updateSuccess: state.updateSuccess,
     };
   });
 
@@ -77,7 +77,7 @@ const EditRecord = () => {
     getProducts();
   }, [getProducts, getLocations]);
 
-  if (updateRecordSuccess) {
+  if (updateSuccess) {
     return <Navigate to="/" />;
   }
 

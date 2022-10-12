@@ -16,6 +16,9 @@ import {
   fetchAllUsers,
   fetchDeleteUser,
   fetchGetAllRecords,
+  fetchPutLocation,
+  fetchDeleteLocation,
+  fetchPostNewLocation,
 } from '../services/api';
 
 const initialState = {
@@ -28,6 +31,7 @@ const initialState = {
   products: [],
   locations: [],
   postRecordSuccess: false,
+  updateSuccess: false,
 };
 
 const useStore = create((set) => {
@@ -141,7 +145,7 @@ const useStore = create((set) => {
       set({ loading: true });
       fetchGetLocations()
         .then((res) => {
-          set({ locations: res.locations, loading: false });
+          set({ locations: res?.locations, loading: false });
         })
         .catch((err) => console.log('fetchGetLocations error:', err))
         .finally(() => set({ loading: false }));
@@ -199,13 +203,13 @@ const useStore = create((set) => {
       fetchPutRecord(rid, newRecord)
         .then((res) => {
           if (res.data.status === 'success') {
-            set({ updateRecordSuccess: true });
+            set({ updateSuccess: true });
             return toastHelper('資料修改成功', 'success');
           }
           return toastHelper('資料修改失敗', 'error');
         })
         .catch((err) => console.log('updateRecord error:', err))
-        .finally(() => set({ updateRecordSuccess: false, loading: false }));
+        .finally(() => set({ updateSuccess: false, loading: false }));
     },
     getAllUsers() {
       set({ loading: true });
@@ -249,6 +253,81 @@ const useStore = create((set) => {
         })
         .catch((err) => console.log('getAllRecords error:', err))
         .finally(() => set({ loading: false }));
+    },
+    updateLocation(lid, newLocation) {
+      set({ loading: true });
+      return fetchPutLocation(lid, newLocation)
+        .then((res) => {
+          if (res.data?.status === 'success') {
+            set({ updateSuccess: true });
+            toastHelper('資料修改成功', 'success');
+            return res;
+          }
+          console.log('fetchPutLocation error:', res);
+          toastHelper(res.response?.data.message || '資料修改失敗', 'error');
+          return res;
+        })
+        .catch((err) => {
+          console.log('updateRecord error:', err);
+          return err;
+        })
+        .finally(() => set({ updateSuccess: false, loading: false }));
+    },
+    postNewLocation(newLocation) {
+      set({ loading: true });
+      return fetchPostNewLocation(newLocation)
+        .then((res) => {
+          const { data, response } = res;
+          if (data?.status === 'success') {
+            set({ loading: false });
+            setTimeout(() => {
+              toastHelper('新增成功', data.status);
+            }, 500);
+          }
+          if (response?.data.status === 'error') {
+            set({ loading: false });
+            setTimeout(() => {
+              toastHelper(response.data.message, 'error');
+            }, 500);
+          }
+          return res;
+        })
+        .catch((err) => {
+          console.log('postNewLocation error:', err);
+          return err;
+        })
+        .finally(() => {
+          set({ loading: false });
+        });
+    },
+    deleteLocation(lid) {
+      return deleteConfirm().then((result) => {
+        if (result.isConfirmed) {
+          return fetchDeleteLocation(lid)
+            .then((res) => {
+              if (res.data?.status === 'success') {
+                setTimeout(() => {
+                  MySwal.fire('記錄已成功刪除');
+                }, 500);
+                return res;
+              }
+              console.log('fetchDeleteLocation error:', res);
+              setTimeout(() => {
+                MySwal.fire({
+                  title: res.response?.data.message || '發生錯誤',
+                  icon: 'error',
+                });
+              }, 500);
+              return res;
+            })
+            .catch((err) => {
+              console.log('deleteLocation error:', err);
+              return err;
+            });
+        }
+        toastHelper('取消刪除', 'info');
+        return 'canceled';
+      });
     },
   };
 });

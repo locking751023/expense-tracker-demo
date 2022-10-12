@@ -171,3 +171,34 @@ export const fetchGetAllRecords = () => {
       return err;
     });
 };
+
+export const fetchPutLocation = (lid, data) => {
+  return apiHelper
+    .put(`/admin/location/${lid}/edit`, { data })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+export const fetchPostNewLocation = (data) => {
+  return apiHelper
+    .post('/admin/location/new', { data })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+export const fetchDeleteLocation = (lid) => {
+  return apiHelper
+    .delete(`/admin/location/${lid}/delete`)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
