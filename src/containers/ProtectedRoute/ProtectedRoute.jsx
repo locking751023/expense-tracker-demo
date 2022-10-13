@@ -16,7 +16,9 @@ const ProtectedRoute = (props) => {
   }, shallow);
 
   if (!user) {
-    toastHelper('請先登入帳號!', 'warning', { position: 'top' });
+    setTimeout(() => {
+      toastHelper('請先登入帳號!', 'warning', { position: 'top' });
+    }, 500);
     return (
       <Navigate
         to={`/user/login?redirect_url=${encodeURIComponent(
@@ -27,7 +29,11 @@ const ProtectedRoute = (props) => {
     );
   }
   if (!user.isAdmin && isMatch) {
-    return navigate(-1);
+    toastHelper('沒有管理員權限!', 'warning', { position: 'top' });
+    setTimeout(() => {
+      navigate(-1);
+    }, 1000);
+    return '';
   }
 
   return children;

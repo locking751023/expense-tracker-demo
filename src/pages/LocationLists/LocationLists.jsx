@@ -27,7 +27,7 @@ const LocationLists = () => {
   const {
     register,
     handleSubmit,
-    setValue,
+    reset,
     formState: { errors },
   } = useForm({ mode: 'onChange' });
 
@@ -36,7 +36,7 @@ const LocationLists = () => {
     postNewLocation({ name: data.addLocation })
       .then((res) => {
         if (res.data?.status === 'success') {
-          setValue('addLocation', '');
+          reset();
           return getLocations();
         }
         console.log('postNewLocation res:', res);
@@ -84,7 +84,6 @@ const LocationLists = () => {
               onGetLocations={getLocations}
               onDeleteLocation={deleteLocation}
               lid={location.id}
-              isNew={false}
               key={location.id}
             />
           );

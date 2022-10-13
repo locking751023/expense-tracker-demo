@@ -202,3 +202,33 @@ export const fetchDeleteLocation = (lid) => {
       return err;
     });
 };
+export const fetchPostNewProduct = (data) => {
+  return apiHelper
+    .post('/admin/product/new', { data })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+export const fetchPutProduct = (pid, data) => {
+  return apiHelper
+    .put(`/admin/product/${pid}/edit`, { data })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+export const fetchDeleteProduct = (pid) => {
+  return apiHelper
+    .delete(`/admin/product/${pid}/delete`)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};

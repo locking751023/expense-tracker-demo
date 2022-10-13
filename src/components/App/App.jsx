@@ -12,6 +12,7 @@ import Admin from '../../pages/Layout/Admin';
 import UserLists from '../../pages/UserLists/UserLists';
 import AllRecords from '../../pages/AllRecords/AllRecords';
 import LocationLists from '../../pages/LocationLists/LocationLists';
+import ProductLists from '../../pages/ProductLists/ProductLists';
 import useStore from '../../store';
 import ProtectRoute from '../../containers/ProtectedRoute/ProtectedRoute';
 import SingPageProtected from '../../containers/SingPageProtected/SingPageProtected';
@@ -95,10 +96,7 @@ const App = () => {
         >
           <Route index element={<UserLists />} />
           <Route path="user" element={<UserLists />} />
-          <Route
-            path="productList"
-            element={<p className=" p-3 text-3xl">productList</p>}
-          />
+          <Route path="productList" element={<ProductLists />} />
           <Route path="locationList" element={<LocationLists />} />
           <Route path="allRecords" element={<AllRecords />} />
         </Route>
