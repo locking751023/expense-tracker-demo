@@ -1,5 +1,6 @@
 import create from 'zustand';
 import { toastHelper, deleteConfirm, MySwal } from '../helpers/swalHelper';
+import { calcShippingSum, calcStockSum } from '../helpers/calcHelper';
 import {
   getJWTToken,
   cleanToken,
@@ -193,7 +194,16 @@ const useStore = create((set) => {
       set({ loading: true });
       fetchGetRecords()
         .then((res) => {
-          set({ records: res.records, loading: false });
+          const records = res.records?.map((record) => {
+            const shippingSum = calcShippingSum(record.RecordedProducts);
+            const stockSum = calcStockSum(record.RecordedProducts);
+            return {
+              ...record,
+              shippingSum,
+              stockSum,
+            };
+          });
+          set({ records, loading: false });
         })
         .catch((err) => console.log('getRecord error:', err))
         .finally(() => set({ loading: false }));

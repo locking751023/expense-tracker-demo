@@ -2,12 +2,12 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import useStore from '../../store';
-// import { cleanToken } from '../../services/api';
+import MultiTypeChart from '../../components/Chart';
 
 const Profile = () => {
   const [isDisable, setIsDisable] = React.useState(true);
   const [changePassword, setChangePassword] = React.useState(false);
-  const [btnSwitch, setBtnSwitch] = React.useState(true);
+  const [Switch, setSwitch] = React.useState(true);
   const { loading, user, updateUser } = useStore((state) => {
     return {
       loading: state.loading,
@@ -146,13 +146,13 @@ const Profile = () => {
             className="flex w-[20%] flex-col items-center"
             data-active={!isDisable}
           >
-            {btnSwitch ? (
+            {Switch ? (
               <div
                 role="button"
                 tabIndex={0}
                 onClick={() => {
                   setIsDisable(false);
-                  setBtnSwitch(false);
+                  setSwitch(false);
                 }}
                 data-active={!isDisable}
                 className="btn my-auto bg-primary text-white shadow-xl data-active:my-2"
@@ -173,7 +173,7 @@ const Profile = () => {
                   onClick={() => {
                     setIsDisable(true);
                     setChangePassword(false);
-                    setBtnSwitch(true);
+                    setSwitch(true);
                     reset();
                   }}
                   className="btn my-2 bg-info text-white shadow-xl"
@@ -185,7 +185,7 @@ const Profile = () => {
             <p
               onClick={() => {
                 setChangePassword(true);
-                setBtnSwitch(false);
+                setSwitch(false);
               }}
               className="mt-auto hover:cursor-pointer hover:text-blue-700 sm:mt-3"
             >
@@ -193,6 +193,12 @@ const Profile = () => {
             </p>
           </div>
         </form>
+        <div
+          className="h-[73%] data-active:h-[62%] sm:h-[80%]"
+          data-active={!Switch}
+        >
+          <MultiTypeChart />
+        </div>
       </div>
     </div>
   );

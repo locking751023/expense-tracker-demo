@@ -18,3 +18,17 @@ export const calSubTotal = (prodPrice, prodAmountOrSendBack, prodUnit) => {
     Math.round(prodPrice * unitSwitch(prodAmountOrSendBack, prodUnit)) || 0
   );
 };
+
+export const calcShippingSum = (RecordedProducts) => {
+  return RecordedProducts.reduce((total, recordedProduct) => {
+    const { historyPrice, amount, Product } = recordedProduct;
+    return Number(total + calSubTotal(historyPrice, amount, Product?.unit));
+  }, 0);
+};
+
+export const calcStockSum = (RecordedProducts) => {
+  return RecordedProducts.reduce((total, recordedProduct) => {
+    const { historyPrice, sendBack, Product } = recordedProduct;
+    return Number(total + calSubTotal(historyPrice, sendBack, Product?.unit));
+  }, 0);
+};
