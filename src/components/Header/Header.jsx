@@ -7,7 +7,10 @@ const Header = (props) => {
   const { user, onLogout } = props;
   return (
     <div className={style.root}>
-      <div className={style.body} data-active={user?.isAdmin}>
+      <div
+        className="flex h-full flex-col justify-between rounded-md bg-gradient-to-br from-[#518ef0] to-[#e2f2fa] p-5 data-active:from-[#f1704c] data-active:to-[#f6e096] md:flex-row"
+        data-active={user?.isAdmin}
+      >
         <h1 className="mb-2 sm:mb-0 sm:flex sm:flex-col sm:justify-center">
           {user?.isAdmin ? `${user?.name} 管理員` : `${user?.name} 記帳簿`}
         </h1>

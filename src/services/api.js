@@ -7,20 +7,18 @@ const apiHelper = axios.create({
   baseURL,
 });
 
+// auth api
 export const getJWTToken = () => {
   return Cookies.get(JWT_TOKEN);
 };
-
 export const setToken = (token) => {
   Cookies.set(JWT_TOKEN, token);
   apiHelper.defaults.headers.authorization = `Bearer ${token}`;
 };
-
 export const cleanToken = () => {
   Cookies.remove(JWT_TOKEN);
   delete apiHelper.defaults.headers.authorization;
 };
-
 export const verifyToken = (token) => {
   return axios
     .get(`${baseURL}/auth`, {
@@ -39,6 +37,19 @@ export const verifyToken = (token) => {
     });
 };
 
+// user api
+export const fetchRegister = (userData) => {
+  return axios
+    .post(`${baseURL}/register`, {
+      ...userData,
+    })
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
 export const fetchLogin = (email, password) => {
   return axios
     .post(`${baseURL}/login`, {
@@ -54,91 +65,6 @@ export const fetchLogin = (email, password) => {
       return err;
     });
 };
-
-export const fetchRegister = (userData) => {
-  return axios
-    .post(`${baseURL}/register`, {
-      ...userData,
-    })
-    .then(({ data }) => {
-      return data;
-    })
-    .catch((err) => {
-      return err;
-    });
-};
-
-export const fetchGetRecords = () => {
-  return apiHelper
-    .get('/records')
-    .then(({ data }) => {
-      return data;
-    })
-    .catch((err) => console.log('axios error:', err));
-};
-
-export const fetchGetRecord = (rid) => {
-  return apiHelper
-    .get(`/record/${rid}`)
-    .then(({ data }) => {
-      return data;
-    })
-    .catch((err) => {
-      return err;
-    });
-};
-
-export const fetchGetProducts = () => {
-  return apiHelper
-    .get('/products')
-    .then(({ data }) => {
-      return data;
-    })
-    .catch((err) => console.log('axios error:', err));
-};
-
-export const fetchGetLocations = () => {
-  return apiHelper
-    .get('/locations')
-    .then(({ data }) => {
-      return data;
-    })
-    .catch((err) => console.log('axios error:', err));
-};
-
-export const fetchPostNewRecord = (data) => {
-  return apiHelper
-    .post('/record/new', { data })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return err;
-    });
-};
-
-export const fetchDeleteRecord = (rid) => {
-  return apiHelper
-    .delete(`/record/${rid}`)
-    .then(({ data }) => {
-      return data;
-    })
-    .catch((err) => {
-      return err;
-    });
-};
-
-export const fetchPutRecord = (rid, data) => {
-  return apiHelper
-    .put(`/record/${rid}/edit`, { data })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return err;
-    });
-};
-
 export const fetchAllUsers = () => {
   return apiHelper
     .get('/admin/users')
@@ -149,7 +75,19 @@ export const fetchAllUsers = () => {
       return err;
     });
 };
-
+export const fetchGetUser = () => {
+  return apiHelper.get();
+};
+export const fetchPutUser = (uid, data) => {
+  return apiHelper
+    .put(`/user/${uid}/edit`, { data })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
 export const fetchDeleteUser = (uid) => {
   return apiHelper
     .delete(`/admin/user/${uid}/delete`)
@@ -161,6 +99,55 @@ export const fetchDeleteUser = (uid) => {
     });
 };
 
+// record api
+export const fetchPostNewRecord = (data) => {
+  return apiHelper
+    .post('/record/new', { data })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+export const fetchGetRecords = () => {
+  return apiHelper
+    .get('/records')
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => console.log('axios error:', err));
+};
+export const fetchGetRecord = (rid) => {
+  return apiHelper
+    .get(`/record/${rid}`)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+export const fetchPutRecord = (rid, data) => {
+  return apiHelper
+    .put(`/record/${rid}/edit`, { data })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+export const fetchDeleteRecord = (rid) => {
+  return apiHelper
+    .delete(`/record/${rid}`)
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => {
+      return err;
+    });
+};
 export const fetchGetAllRecords = () => {
   return apiHelper
     .get('/admin/records')
@@ -172,9 +159,10 @@ export const fetchGetAllRecords = () => {
     });
 };
 
-export const fetchPutLocation = (lid, data) => {
+// location api
+export const fetchPostNewLocation = (data) => {
   return apiHelper
-    .put(`/admin/location/${lid}/edit`, { data })
+    .post('/admin/location/new', { data })
     .then((res) => {
       return res;
     })
@@ -182,9 +170,17 @@ export const fetchPutLocation = (lid, data) => {
       return err;
     });
 };
-export const fetchPostNewLocation = (data) => {
+export const fetchGetLocations = () => {
   return apiHelper
-    .post('/admin/location/new', { data })
+    .get('/locations')
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => console.log('axios error:', err));
+};
+export const fetchPutLocation = (lid, data) => {
+  return apiHelper
+    .put(`/admin/location/${lid}/edit`, { data })
     .then((res) => {
       return res;
     })
@@ -202,6 +198,8 @@ export const fetchDeleteLocation = (lid) => {
       return err;
     });
 };
+
+// product api
 export const fetchPostNewProduct = (data) => {
   return apiHelper
     .post('/admin/product/new', { data })
@@ -211,6 +209,14 @@ export const fetchPostNewProduct = (data) => {
     .catch((err) => {
       return err;
     });
+};
+export const fetchGetProducts = () => {
+  return apiHelper
+    .get('/products')
+    .then(({ data }) => {
+      return data;
+    })
+    .catch((err) => console.log('axios error:', err));
 };
 export const fetchPutProduct = (pid, data) => {
   return apiHelper

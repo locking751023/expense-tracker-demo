@@ -15,7 +15,7 @@ const NewRecord = () => {
     getProducts,
     getLocations,
     postNewRecord,
-    postRecordSuccess,
+    actionSuccess,
   } = useStore((state) => {
     return {
       loading: state.loading,
@@ -24,7 +24,7 @@ const NewRecord = () => {
       getProducts: state.getProducts,
       getLocations: state.getLocations,
       postNewRecord: state.postNewRecord,
-      postRecordSuccess: state.postRecordSuccess,
+      actionSuccess: state.actionSuccess,
     };
   });
 
@@ -64,7 +64,7 @@ const NewRecord = () => {
     getLocations();
   }, [getProducts, getLocations]);
 
-  if (postRecordSuccess) {
+  if (actionSuccess) {
     return <Navigate to="/" />;
   }
   return (

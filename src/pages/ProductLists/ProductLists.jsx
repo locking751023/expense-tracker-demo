@@ -33,7 +33,6 @@ const ProductLists = () => {
 
   const atSubmit = (data) => {
     if (loading) return;
-    console.log('submit data:', data);
     postNewProduct({
       name: data.productName,
       unit: data.productUnit,

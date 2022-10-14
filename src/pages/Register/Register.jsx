@@ -7,10 +7,10 @@ import useStore from '../../store';
 
 const Register = () => {
   const navigate = useNavigate();
-  const { onRegister, registerSuccess } = useStore((state) => {
+  const { onRegister, actionSuccess } = useStore((state) => {
     return {
       onRegister: state.onRegister,
-      registerSuccess: state.registerSuccess,
+      actionSuccess: state.actionSuccess,
     };
   }, shallow);
   const {
@@ -23,7 +23,7 @@ const Register = () => {
   const atSubmit = (data) => {
     onRegister(data);
   };
-  if (registerSuccess) {
+  if (actionSuccess) {
     return <Navigate to="/user/login" />;
   }
 

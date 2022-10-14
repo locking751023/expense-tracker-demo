@@ -52,7 +52,7 @@ const LocationFrom = (props) => {
           地點名稱：
           <input
             type="text"
-            className="mt-2 w-full rounded-md border-2 bg-gray-100 p-1 sm:w-[60%]"
+            className="mt-2 w-full rounded-md border-2 border-gray-300 bg-gray-100 p-1 sm:w-[60%]"
             disabled={isDisabled}
             {...register('name', { required: '不可為空白' })}
           />

@@ -12,13 +12,13 @@ import IsLoading from '../../containers/IsLoading';
 const Record = () => {
   const params = useParams().rid;
   const [recordDate, setRecordDate] = React.useState();
-  const { record, getRecord, deleteRecord, deleteRecordSuccess } = useStore(
+  const { record, getRecord, deleteRecord, actionSuccess } = useStore(
     (state) => {
       return {
         record: state.record,
         getRecord: state.getRecord,
         deleteRecord: state.deleteRecord,
-        deleteRecordSuccess: state.deleteRecordSuccess,
+        actionSuccess: state.actionSuccess,
       };
     },
     shallow,
@@ -49,7 +49,7 @@ const Record = () => {
     });
   }, [getRecord, params, date]);
 
-  if (deleteRecordSuccess) {
+  if (actionSuccess) {
     return <Navigate to="/" />;
   }
 

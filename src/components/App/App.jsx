@@ -1,5 +1,10 @@
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import User from '../../pages/Layout/User';
 import Login from '../../pages/Login';
 import Register from '../../pages/Register';
@@ -8,6 +13,7 @@ import Records from '../../pages/Records';
 import Record from '../../pages/Record';
 import NewRecord from '../../pages/NewRecord';
 import EditRecord from '../../pages/EditRecord';
+import Profile from '../../pages/Profile';
 import Admin from '../../pages/Layout/Admin';
 import UserLists from '../../pages/UserLists/UserLists';
 import AllRecords from '../../pages/AllRecords/AllRecords';
@@ -68,23 +74,7 @@ const App = () => {
             <Route path=":rid" element={<Record />} />
             <Route path=":rid/edit" element={<EditRecord />} />
           </Route>
-          <Route
-            path="profile"
-            element={
-              <div className="flex h-full w-full justify-center">
-                <p className="my-auto text-5xl">施工中...</p>
-              </div>
-            }
-          >
-            <Route
-              path="setting"
-              element={
-                <div className="flex h-full w-full justify-center">
-                  <p className="my-auto text-5xl">施工中...</p>
-                </div>
-              }
-            />
-          </Route>
+          <Route path="profile" element={<Profile />} />
         </Route>
         <Route
           path="admin"
@@ -100,14 +90,7 @@ const App = () => {
           <Route path="locationList" element={<LocationLists />} />
           <Route path="allRecords" element={<AllRecords />} />
         </Route>
-        <Route
-          path="*"
-          element={
-            <main className="p-4">
-              <p>找不到頁面!!</p>
-            </main>
-          }
-        />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );

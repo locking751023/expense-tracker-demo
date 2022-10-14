@@ -2,39 +2,39 @@ import create from 'zustand';
 import { toastHelper, deleteConfirm, MySwal } from '../helpers/swalHelper';
 import {
   getJWTToken,
-  verifyToken,
-  fetchLogin,
   cleanToken,
+  verifyToken,
   fetchRegister,
+  fetchLogin,
+  fetchAllUsers,
+  fetchPutUser,
+  fetchDeleteUser,
+  fetchPostNewRecord,
   fetchGetRecords,
   fetchGetRecord,
-  fetchGetProducts,
-  fetchGetLocations,
-  fetchDeleteRecord,
-  fetchPostNewRecord,
   fetchPutRecord,
-  fetchAllUsers,
-  fetchDeleteUser,
+  fetchDeleteRecord,
   fetchGetAllRecords,
+  fetchPostNewLocation,
+  fetchGetLocations,
   fetchPutLocation,
   fetchDeleteLocation,
-  fetchPostNewLocation,
   fetchPostNewProduct,
+  fetchGetProducts,
   fetchPutProduct,
   fetchDeleteProduct,
 } from '../services/api';
 
 const initialState = {
   isAppInitializedComplete: false,
-  user: null,
   loading: false,
-  registerSuccess: false,
-  records: [],
+  actionSuccess: false,
+  user: null,
+  users: [],
   record: [],
+  records: [],
   products: [],
   locations: [],
-  postRecordSuccess: false,
-  updateSuccess: false,
 };
 
 const useStore = create((set) => {
@@ -65,7 +65,25 @@ const useStore = create((set) => {
         });
       }
     },
+
     // user action
+    onRegister(userData) {
+      fetchRegister(userData)
+        .then((res) => {
+          const { response, message, status } = res;
+          if (status === 'success') {
+            set({ actionSuccess: true });
+            toastHelper(message, status);
+          }
+          if (response) {
+            toastHelper(response.data.message, 'error');
+          }
+        })
+        .catch((err) => console.log('onRegister error:', err))
+        .finally(() => {
+          set({ actionSuccess: false });
+        });
+    },
     onLogin(email, password) {
       set({ loading: true });
       fetchLogin(email, password)
@@ -89,23 +107,6 @@ const useStore = create((set) => {
           set({ loading: false });
         });
     },
-    onRegister(userData) {
-      fetchRegister(userData)
-        .then((res) => {
-          const { response, message, status } = res;
-          if (status === 'success') {
-            set({ registerSuccess: true });
-            toastHelper(message, status);
-          }
-          if (response) {
-            toastHelper(response.data.message, 'error');
-          }
-        })
-        .catch((err) => console.log('onRegister error:', err))
-        .finally(() => {
-          set({ registerSuccess: false });
-        });
-    },
     onLogout() {
       cleanToken();
       window.location.reload();
@@ -114,9 +115,33 @@ const useStore = create((set) => {
       set({ loading: true });
       fetchAllUsers()
         .then((res) => {
-          set({ users: res.data, loading: false });
+          set({
+            users: res.data,
+            loading: false,
+          });
         })
         .catch((err) => console.log('getAllUsers error:', err))
+        .finally(() => set({ loading: false }));
+    },
+    updateUser(uid, newUserData) {
+      set({ loading: true });
+      fetchPutUser(uid, newUserData)
+        .then((res) => {
+          if (res.data?.status === 'success') {
+            set({ loading: false });
+            toastHelper('資料修改成功', 'success');
+            if (res.data?.reload) {
+              cleanToken();
+            }
+            console.log('fetchPutUser success:', res);
+            window.location.reload();
+            return res;
+          }
+          console.log('fetchPutUser error:', res);
+          toastHelper('資料修改失敗', 'error');
+          return res;
+        })
+        .catch((err) => console.log('updateUser error:', err))
         .finally(() => set({ loading: false }));
     },
     deleteUser(uid) {
@@ -144,7 +169,26 @@ const useStore = create((set) => {
         return 'canceled';
       });
     },
+
     // record action
+    postNewRecord(newRecord) {
+      set({ loading: true });
+      fetchPostNewRecord(newRecord)
+        .then((res) => {
+          const { data, response } = res;
+          if (data?.status === 'success') {
+            toastHelper('新增成功', data.status);
+            set({ actionSuccess: true });
+          }
+          if (response?.data.status === 'error') {
+            toastHelper(response.data.message, response.data.status);
+          }
+        })
+        .catch((err) => console.log('postNewRecord error:', err))
+        .finally(() => {
+          set({ actionSuccess: false, loading: true });
+        });
+    },
     getRecords() {
       set({ loading: true });
       fetchGetRecords()
@@ -171,33 +215,27 @@ const useStore = create((set) => {
         .catch((err) => console.log('getRecord error:', err))
         .finally(() => set({ loading: false }));
     },
-    postNewRecord(newRecord) {
+    updateRecord(rid, newRecord) {
       set({ loading: true });
-      fetchPostNewRecord(newRecord)
+      fetchPutRecord(rid, newRecord)
         .then((res) => {
-          const { data, response } = res;
-          if (data?.status === 'success') {
-            toastHelper('新增成功', data.status);
-            set({ postRecordSuccess: true });
+          if (res.data.status === 'success') {
+            set({ actionSuccess: true });
+            return toastHelper('資料修改成功', 'success');
           }
-          if (response?.data.status === 'error') {
-            toastHelper(response.data.message, response.data.status);
-          }
+          return toastHelper('資料修改失敗', 'error');
         })
-        .catch((err) => console.log('postNewRecord error:', err))
-        .finally(() => {
-          set({ postRecordSuccess: false, loading: true });
-        });
+        .catch((err) => console.log('updateRecord error:', err))
+        .finally(() => set({ actionSuccess: false, loading: false }));
     },
     deleteRecord(rid) {
-      set({ deleteRecordSuccess: false });
       return deleteConfirm().then((result) => {
         if (result.isConfirmed) {
           return fetchDeleteRecord(rid)
             .then((res) => {
               if (res.status === 'success') {
                 MySwal.fire('記錄已成功刪除');
-                set({ deleteRecordSuccess: true });
+                set({ actionSuccess: true });
                 return res;
               }
               console.log('fetchDeleteRecord error:', res);
@@ -212,25 +250,12 @@ const useStore = create((set) => {
               return err;
             })
             .finally(() => {
-              set({ deleteRecordSuccess: false });
+              set({ actionSuccess: false });
             });
         }
         toastHelper('取消刪除', 'info');
         return 'canceled';
       });
-    },
-    updateRecord(rid, newRecord) {
-      set({ loading: true });
-      fetchPutRecord(rid, newRecord)
-        .then((res) => {
-          if (res.data.status === 'success') {
-            set({ updateSuccess: true });
-            return toastHelper('資料修改成功', 'success');
-          }
-          return toastHelper('資料修改失敗', 'error');
-        })
-        .catch((err) => console.log('updateRecord error:', err))
-        .finally(() => set({ updateSuccess: false, loading: false }));
     },
     getAllRecords() {
       set({ loading: true });
@@ -241,16 +266,8 @@ const useStore = create((set) => {
         .catch((err) => console.log('getAllRecords error:', err))
         .finally(() => set({ loading: false }));
     },
+
     // product action
-    getProducts() {
-      set({ loading: true });
-      fetchGetProducts()
-        .then((res) => {
-          set({ products: res.products, loading: false });
-        })
-        .catch((err) => console.log('fetchGetProducts error:', err))
-        .finally(() => set({ loading: false }));
-    },
     postNewProduct(newProduct) {
       set({ loading: true });
       return fetchPostNewProduct(newProduct)
@@ -278,12 +295,21 @@ const useStore = create((set) => {
           set({ loading: false });
         });
     },
+    getProducts() {
+      set({ loading: true });
+      fetchGetProducts()
+        .then((res) => {
+          set({ products: res.products, loading: false });
+        })
+        .catch((err) => console.log('fetchGetProducts error:', err))
+        .finally(() => set({ loading: false }));
+    },
     updateProduct(lid, newProduct) {
       set({ loading: true });
       return fetchPutProduct(lid, newProduct)
         .then((res) => {
           if (res.data?.status === 'success') {
-            set({ updateSuccess: true });
+            set({ loading: false });
             toastHelper('資料修改成功', 'success');
             return res;
           }
@@ -295,7 +321,7 @@ const useStore = create((set) => {
           console.log('updateRecord error:', err);
           return err;
         })
-        .finally(() => set({ updateSuccess: false, loading: false }));
+        .finally(() => set({ loading: false }));
     },
     deleteProduct(lid) {
       return deleteConfirm().then((result) => {
@@ -326,33 +352,24 @@ const useStore = create((set) => {
         return 'canceled';
       });
     },
+
     // location action
-    getLocations() {
-      set({ loading: true });
-      fetchGetLocations()
-        .then((res) => {
-          set({ locations: res?.locations, loading: false });
-        })
-        .catch((err) => console.log('fetchGetLocations error:', err))
-        .finally(() => set({ loading: false }));
-    },
     postNewLocation(newLocation) {
       set({ loading: true });
       return fetchPostNewLocation(newLocation)
         .then((res) => {
           const { data, response } = res;
           if (data?.status === 'success') {
-            set({ loading: false });
             setTimeout(() => {
               toastHelper('新增成功', data.status);
             }, 500);
           }
           if (response?.data.status === 'error') {
-            set({ loading: false });
             setTimeout(() => {
               toastHelper(response.data.message, 'error');
             }, 500);
           }
+          set({ loading: false });
           return res;
         })
         .catch((err) => {
@@ -363,12 +380,21 @@ const useStore = create((set) => {
           set({ loading: false });
         });
     },
+    getLocations() {
+      set({ loading: true });
+      fetchGetLocations()
+        .then((res) => {
+          set({ locations: res?.locations, loading: false });
+        })
+        .catch((err) => console.log('fetchGetLocations error:', err))
+        .finally(() => set({ loading: false }));
+    },
     updateLocation(lid, newLocation) {
       set({ loading: true });
       return fetchPutLocation(lid, newLocation)
         .then((res) => {
           if (res.data?.status === 'success') {
-            set({ updateSuccess: true });
+            set({ loading: false });
             toastHelper('資料修改成功', 'success');
             return res;
           }
@@ -380,7 +406,7 @@ const useStore = create((set) => {
           console.log('updateRecord error:', err);
           return err;
         })
-        .finally(() => set({ updateSuccess: false, loading: false }));
+        .finally(() => set({ loading: false }));
     },
     deleteLocation(lid) {
       return deleteConfirm().then((result) => {
