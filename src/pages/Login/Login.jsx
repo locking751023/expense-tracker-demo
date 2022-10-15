@@ -24,7 +24,7 @@ const Login = () => {
   return (
     <form
       onSubmit={handleSubmit(atSubmit)}
-      className="container m-auto flex h-[55%] max-h-[425px] max-w-lg flex-col overflow-y-scroll rounded-xl border-8 shadow-xl backdrop-blur-lg md:h-[45%]"
+      className="container m-auto flex h-[55%] max-h-[425px] max-w-lg flex-col overflow-y-scroll rounded-xl border-8 shadow-xl backdrop-blur-lg md:h-[45%] lg:overflow-y-hidden"
     >
       <h2 className="w-full p-2 text-center">登入帳號</h2>
       <label className="flex h-[33%] flex-col justify-center px-2">

@@ -21,14 +21,12 @@ const InputForm = (props) => {
   const { field: amount } = useController({
     name: `product.${name}.amount`,
     control,
-    rules: { required: true },
     defaultValue: defValues?.amount,
   });
   const { field: sendBack } = useController({
     name: `product.${name}.sendBack`,
     control,
-    rules: { required: true },
-    defaultValue: defValues?.sendBack,
+    defaultValue: defValues?.sendBack || 0,
   });
   const { field: subTotalValue } = useController({
     name: `product.${name}.subTotalValue`,

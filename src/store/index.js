@@ -196,7 +196,10 @@ const useStore = create((set) => {
         .then((res) => {
           const records = res.records?.map((record) => {
             const shippingSum = calcShippingSum(record.RecordedProducts);
-            const stockSum = calcStockSum(record.RecordedProducts);
+            const stockSum =
+              calcStockSum(record.RecordedProducts) === 0
+                ? '0'
+                : calcStockSum(record.RecordedProducts);
             return {
               ...record,
               shippingSum,

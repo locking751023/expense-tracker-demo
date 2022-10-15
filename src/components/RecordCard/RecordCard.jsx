@@ -20,10 +20,11 @@ const RecordCard: React.FC<RecordCardProps> = (props) => {
   const [salesSum, setSalesSum] = React.useState(0);
   const [commission, setCommission] = React.useState(0);
   const [sumOfBusiness, setSumOfBusiness] = React.useState(0);
+  const RATIO = 0.16;
 
   React.useEffect(() => {
     setSalesSum(shippingSum - stockSum);
-    setCommission(Math.round(salesSum * 0.16));
+    setCommission(Math.round(salesSum * RATIO));
     setSumOfBusiness(salesSum - commission);
   }, [shippingSum, stockSum, salesSum, commission]);
 

@@ -48,8 +48,7 @@ const MultiTypeChart = () => {
       return records.map((record) => dayjs(record.date).format('MM/DD (dd)'));
     });
   }, [records]);
-  console.log('records:', records);
-  console.log('shippingSum:', shippingSum);
+
   const data = {
     labels,
     datasets: [
