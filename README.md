@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+<h1>Expense-Tracker</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![npm version](https://img.shields.io/badge/npm-v8.11.0-blue?style=flat 'npm')
+![node version](https://img.shields.io/badge/node-v16.15.1-impotent?style=flat 'node')
+![React version](https://img.shields.io/badge/React-v18.2.0-brightgreen?style=flat 'React')
 
-## Available Scripts
+## 基於 RCA 開發的記帳簿
 
-In the project directory, you can run:
+#### 此專案目前功能有:
 
-### `npm start`
+使用者
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 登入 / 註冊 / 登出 (尚未實作第三方登入)
+- 修改登入帳號及密碼
+- 新增 / 瀏覽 / 修改 / 刪除個人記錄
+- 瀏覽近十筆出貨、存貨及銷售記錄趨勢圖
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+管理員權限
 
-### `npm test`
+- 瀏覽使用者清單 / 刪除使用者
+- 瀏覽 / 刪除所有使用者記錄
+- 新增 / 修改 / 刪除產品清單
+- 新增 / 修改 / 刪除地點清單
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# 使用技術
 
-### `npm run build`
+```
+React / Zustand / TailwindCSS / axios / react-router-dom / react-hook-form / sweetalert / Chart.js
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Get Started
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### 1. 下載專案
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+git clone https://github.com/Tommy1023/expense-tracker.git
+```
 
-### `npm run eject`
+#### 2. 初始化
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### 3. 設置環境變數
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+PUBLIC_URL = '/expense-tracker'
+REACT_APP_API_URL = 'http://http://localhost:3000/api' (backend api base url)
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### 4. 啟動專案
 
-## Learn More
+```
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Demo
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[測試網頁：https://locking751023.github.io/expense-tracker-demo/](https://locking751023.github.io/expense-tracker-demo/)
 
-### Code Splitting
+admin 測試帳號
+帳號：root@example.com, 密碼：00000000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+user 測試帳號
+帳號：user1@example.com, 密碼：11111111
 
-### Analyzing the Bundle Size
+帳號：user2@example.com, 密碼：22222222
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="./src/assets/images/login.jpeg" alt="drawing" width="600"/>
+<img src="./src/assets/images/register.jpeg" alt="drawing" width="600"/>
+<img src="./src/assets/images/records.jpeg" alt="drawing" width="600"/>
+<img src="./src/assets/images/record.jpeg" alt="drawing" width="600"/>
+<img src="./src/assets/images/newRecord.png" alt="drawing" width="600"/>
+<img src="./src/assets/images/profile.jpeg" alt="drawing" width="600"/>
+<img src="./src/assets/images/users.png" alt="drawing" width="600"/>
+<img src="./src/assets/images/products.png" alt="drawing" width="600"/>
