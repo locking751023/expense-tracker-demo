@@ -3,18 +3,23 @@ import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import useStore from '../../store';
 import MultiTypeChart from '../../components/Chart';
+import PasswordSwitch from '../../components/PasswordSwitch';
 
 const Profile = () => {
   const [isDisable, setIsDisable] = React.useState(true);
   const [changePassword, setChangePassword] = React.useState(false);
   const [Switch, setSwitch] = React.useState(true);
-  const { loading, user, updateUser } = useStore((state) => {
-    return {
-      loading: state.loading,
-      user: state.user,
-      updateUser: state.updateUser,
-    };
-  });
+  const { loading, user, updateUser, passwordHide, setPasswordHide } = useStore(
+    (state) => {
+      return {
+        loading: state.loading,
+        user: state.user,
+        updateUser: state.updateUser,
+        passwordHide: state.passwordHide,
+        setPasswordHide: state.setPasswordHide,
+      };
+    },
+  );
   const {
     register,
     handleSubmit,
@@ -91,46 +96,56 @@ const Profile = () => {
                 </small>
               </label>
               {changePassword && (
-                <>
-                  <label className="mb-1 flex w-full flex-col">
-                    <div>
-                      修改密碼:
-                      <input
-                        type="text"
-                        placeholder="請輸入密碼(6~12字)"
-                        className="w-[63%] rounded-md border-2 border-gray-300 bg-gray-100 p-1"
-                        {...register('password', {
-                          maxLength: { value: 12, message: '長度超過12' },
-                          minLength: { value: 6, message: '長度小於6' },
-                        })}
-                      />
-                    </div>
-                    <small className="text-danger">
-                      <ErrorMessage errors={errors} name="password" />
-                    </small>
-                  </label>
-                  <label className="mb-1 flex w-full flex-col">
-                    <div>
-                      確認密碼:
-                      <input
-                        type="text"
-                        placeholder="請輸入密碼(6~12字)"
-                        className="w-[63%] rounded-md border-2 border-gray-300 bg-gray-100 p-1"
-                        {...register('checkPassword', {
-                          maxLength: { value: 12, message: '長度超過12' },
-                          minLength: { value: 6, message: '長度小於6' },
-                          validate: {
-                            isMatch: (value) =>
-                              value === getValues('password') || '密碼不相同',
-                          },
-                        })}
-                      />
-                    </div>
-                    <small className="text-danger">
-                      <ErrorMessage errors={errors} name="checkPassword" />
-                    </small>
-                  </label>
-                </>
+                <div className="flex">
+                  <div className="w-full">
+                    <label className="mb-1 flex flex-col">
+                      <div className="flex items-center">
+                        修改密碼:
+                        <div className="flex w-[74%]">
+                          <input
+                            type={passwordHide ? 'password' : 'text'}
+                            placeholder="請輸入密碼(6~12字)"
+                            className="w-full rounded-md border-2 border-gray-300 bg-gray-100 p-1"
+                            {...register('password', {
+                              required: '此欄位為必填',
+                              maxLength: { value: 12, message: '長度超過12' },
+                              minLength: { value: 6, message: '長度小於6' },
+                            })}
+                          />
+                          <PasswordSwitch
+                            passwordHide={passwordHide}
+                            setPasswordHide={setPasswordHide}
+                          />
+                        </div>
+                      </div>
+                      <small className="text-danger">
+                        <ErrorMessage errors={errors} name="password" />
+                      </small>
+                    </label>
+                    <label className="mb-1 flex flex-col">
+                      <div>
+                        確認密碼:
+                        <input
+                          type={passwordHide ? 'password' : 'text'}
+                          placeholder="請輸入密碼(6~12字)"
+                          className="w-[63%] rounded-md border-2 border-gray-300 bg-gray-100 p-1 sm:w-[63%]"
+                          {...register('checkPassword', {
+                            required: '此欄位為必填',
+                            maxLength: { value: 12, message: '長度超過12' },
+                            minLength: { value: 6, message: '長度小於6' },
+                            validate: {
+                              isMatch: (value) =>
+                                value === getValues('password') || '密碼不相同',
+                            },
+                          })}
+                        />
+                      </div>
+                      <small className="text-danger">
+                        <ErrorMessage errors={errors} name="checkPassword" />
+                      </small>
+                    </label>
+                  </div>
+                </div>
               )}
             </div>
             <div className="sm:w-1/2">

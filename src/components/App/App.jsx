@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -47,7 +47,7 @@ const App = () => {
   }
 
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router>
       <Routes>
         <Route
           path="user"

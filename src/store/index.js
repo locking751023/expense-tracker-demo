@@ -30,6 +30,7 @@ const initialState = {
   isAppInitializedComplete: false,
   loading: false,
   actionSuccess: false,
+  passwordHide: true,
   user: null,
   users: [],
   record: [],
@@ -107,6 +108,9 @@ const useStore = create((set) => {
         .finally(() => {
           set({ loading: false });
         });
+    },
+    setPasswordHide(prev) {
+      set({ passwordHide: !prev });
     },
     onLogout() {
       cleanToken();
