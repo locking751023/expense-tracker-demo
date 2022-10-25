@@ -35,18 +35,34 @@ const MultiTypeChart = () => {
   const [labels, setLabels] = React.useState();
 
   React.useEffect(() => {
-    setShippingSum(() => {
-      return records.map((record) => record.shippingSum);
+    const tenRecords = records.slice(0, 10);
+    const tenShippingSum = [];
+    const tenStockSum = [];
+    const tenSalesSum = [];
+    const tenLabels = [];
+    if (tenRecords.length < 10) {
+      for (let i = tenRecords.length; i < 10; i += 1)
+        tenRecords.push({
+          shippingSum: 0,
+          stockSum: 0,
+          salesSum: 0,
+          label: '無記錄',
+        });
+    }
+    tenRecords.map((record) => {
+      tenShippingSum.push(record.shippingSum);
+      tenStockSum.push(record.stockSum);
+      tenSalesSum.push(record.shippingSum - record.stockSum);
+      if (record.date) {
+        return tenLabels.push(dayjs(record.date).format('MM/DD (dd)'));
+      }
+      tenLabels.push(record.label);
+      return record;
     });
-    setStockSum(() => {
-      return records.map((record) => record.stockSum);
-    });
-    setSalesSum(() => {
-      return records.map((record) => record.shippingSum - record.stockSum);
-    });
-    setLabels(() => {
-      return records.map((record) => dayjs(record.date).format('MM/DD (dd)'));
-    });
+    setShippingSum(tenShippingSum);
+    setStockSum(tenStockSum);
+    setSalesSum(tenSalesSum);
+    setLabels(tenLabels);
   }, [records]);
 
   const data = {

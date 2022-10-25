@@ -18,8 +18,12 @@ const InputForm = (props) => {
     return null;
   });
 
-  const { field: amount } = useController({
+  const {
+    field: amount,
+    fieldState: { error },
+  } = useController({
     name: `product.${name}.amount`,
+    rules: { required: '必填' },
     control,
     defaultValue: defValues?.amount,
   });
@@ -59,14 +63,17 @@ const InputForm = (props) => {
       <Item item={name} />
       <Item item={price} />
       <Item item={unit} />
-      <input
-        type="number"
-        min={0.0}
-        max={99.0}
-        step={step}
-        className="rounded-md border-2 bg-slate-100"
-        {...amount}
-      />
+      <div className="flex">
+        <input
+          type="number"
+          min={0.0}
+          max={99.0}
+          step={step}
+          className="w-full rounded-md border-2 bg-slate-100"
+          {...amount}
+        />
+        <small className="text-danger">{error?.message}</small>
+      </div>
       <input
         type="number"
         min={0.0}

@@ -9,17 +9,23 @@ const Profile = () => {
   const [isDisable, setIsDisable] = React.useState(true);
   const [changePassword, setChangePassword] = React.useState(false);
   const [Switch, setSwitch] = React.useState(true);
-  const { loading, user, updateUser, passwordHide, setPasswordHide } = useStore(
-    (state) => {
-      return {
-        loading: state.loading,
-        user: state.user,
-        updateUser: state.updateUser,
-        passwordHide: state.passwordHide,
-        setPasswordHide: state.setPasswordHide,
-      };
-    },
-  );
+  const {
+    loading,
+    user,
+    updateUser,
+    passwordHide,
+    setPasswordHide,
+    getRecords,
+  } = useStore((state) => {
+    return {
+      loading: state.loading,
+      user: state.user,
+      updateUser: state.updateUser,
+      passwordHide: state.passwordHide,
+      setPasswordHide: state.setPasswordHide,
+      getRecords: state.getRecords,
+    };
+  });
   const {
     register,
     handleSubmit,
@@ -32,6 +38,9 @@ const Profile = () => {
       userEmail: user.email,
     },
   });
+  React.useEffect(() => {
+    getRecords();
+  }, []);//eslint-disable-line
 
   const atSubmit = (data) => {
     if (loading) return;
@@ -209,7 +218,7 @@ const Profile = () => {
           </div>
         </form>
         <div
-          className="h-[73%] data-active:h-[62%] sm:h-[80%]"
+          className="h-[73%] data-active:h-[62%] sm:h-[75%]"
           data-active={!Switch}
         >
           <MultiTypeChart />
