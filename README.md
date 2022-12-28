@@ -57,16 +57,6 @@ npm start
 
 ### Demo
 
-[測試網頁：https://locking751023.github.io/expense-tracker-demo/](https://locking751023.github.io/expense-tracker-demo/)
-
-admin 測試帳號
-帳號：root@example.com, 密碼：00000000
-
-user 測試帳號
-帳號：user1@example.com, 密碼：11111111
-
-帳號：user2@example.com, 密碼：22222222
-
 <img src="./src/assets/images/login.jpeg" alt="drawing" width="600"/>
 <img src="./src/assets/images/register.jpeg" alt="drawing" width="600"/>
 <img src="./src/assets/images/records.jpeg" alt="drawing" width="600"/>
