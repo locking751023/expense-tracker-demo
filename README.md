@@ -4,6 +4,8 @@
 ![node version](https://img.shields.io/badge/node-v16.15.1-impotent?style=flat 'node')
 ![React version](https://img.shields.io/badge/React-v18.2.0-brightgreen?style=flat 'React')
 
+Backend-server：https://github.com/locking751023/expense-tracker-backend-demo
+
 ## 基於 RCA 開發的記帳簿
 
 #### 此專案目前功能有:
